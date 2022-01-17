@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Encadreur, Promoteur, Groupe, Stagier
+
+admin.site.register(Encadreur)
+admin.site.register(Promoteur)
+admin.site.register(Groupe)
+admin.site.register(Stagier)
