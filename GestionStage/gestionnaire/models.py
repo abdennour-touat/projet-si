@@ -24,3 +24,17 @@ class Stagier(models.Model):
     prenom = models.CharField(max_length=120)
     niveauDetude = models.CharField(max_length=80)
     idGroupe = models.ForeignKey(Groupe, on_delete=models.CASCADE)
+
+class Organisme(models.Model):
+    
+    nomOrganisme=models.CharField(max_length=120) 
+    typeOrganisme=models.CharField(max_length=30) 
+
+class typeStage(models.Model):
+    typeStage=models.CharField(max_length=30)
+    duree=models.IntegerField
+
+class Stage(models.Model):
+    nomStage=models.CharField(max_length=120)
+    typeStage=models.ForeignKey(typeStage, on_delete=models.CASCADE)
+    idOrganisme=models.ForeignKey(Organisme, on_delete=models.CASCADE)
