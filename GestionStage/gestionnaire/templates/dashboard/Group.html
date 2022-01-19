@@ -1,0 +1,46 @@
+{% extends 'partials/base.html' %} 
+{% block title %}Grupe Page{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}  
+<div class="row my-4">
+    <div class="col-md-3">
+        <div class="card card-body">
+            <h5>Ajouter Groupe</h5>
+            <hr>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input class="btn btn-success btn-block" type="submit" value="Add">
+            </form>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <table class="table bg-white">
+            <thead class="bg-info text-white">
+                <tr>
+                    <th scope="col">Numero Stage</th>
+                    <th scope="col">Date Stage</th>
+                    <th scope="col">ID Promoteur</th>
+                    <th scope="col">ID Encadreur</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.numStage }}</td>
+                    <td>{{ item.DateStage }}</td>
+                    <td>{{ item.idPromoteur }}</td>
+                    <td>{{ item.numEncadreur }}</td>
+                    <td>
+                        <a class="btn btn-info btn-sm mr-2"
+                            href="{% url 'dashboard-Group-edit' item.id %}">Edit</a>
+                        <a class="btn btn-danger btn-sm ml-2"
+                            href="{% url 'dashboard-group-delete' item.id %}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

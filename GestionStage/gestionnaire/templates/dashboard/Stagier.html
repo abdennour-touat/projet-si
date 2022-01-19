@@ -1,0 +1,55 @@
+{% extends 'partials/base.html' %} 
+{% block title %}Stagier Page{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}  
+<div class="row my-4">
+    <div class="col-md-4">
+        <div class="card card-body">
+            <h5>Ajouter Stagier</h5>
+            <hr>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input class="btn btn-success btn-block" type="submit" value="Add">
+            </form>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <table class="table bg-white">
+            <thead class="bg-info text-white">
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">Telephone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">ID Groupe</th>
+                    <th scope="col">Niveau d'etude</th>
+                    <th scope="col">Option</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.nomStagier }}</td>
+                    <td>{{ item.prenomStagier }}</td>
+                    <td>{{ item.numeroTelephoneStagier }}</td>
+                    <td>{{ item.emailStagier }}</td>
+                    <td>{{ item.idGroupe }}</td>
+                    <td>{{ item.niveauDetude }}</td>
+                    <td>
+                        <a class="btn btn-info btn-sm mr-2"
+                            href="{% url 'dashboard-Stagier-edit' item.id %}">Edit</a>
+                        <a class="btn btn-danger btn-sm ml-2"
+                            href="{% url 'dashboard-Stagier-delete' item.id %}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Rechercher">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

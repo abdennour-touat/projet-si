@@ -50,7 +50,7 @@ class Encadreur(models.Model):
     def __str__(self):
         return f'{self.nomEncadreur}-{self.prenomEncadreur}'
 
-
+#abdenour's part....    
 class Groupe(models.Model):
     dateStage = models.DateField()
     numStage = models.ForeignKey(Stage, on_delete=models.CASCADE)

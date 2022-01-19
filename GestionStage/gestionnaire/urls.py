@@ -12,4 +12,11 @@ urlpatterns = [
     path('Organisme/', views.organisme, name='dashboard-Organisme'),
     path('Organisme/edit/<int:pk>/', views.OrganismeEdit, name='dashboard-Organisme-edit'),
     path('Organisme/delete/<int:pk>/', views.OrganismeDelete, name='dashboard-Organisme-delete'),
+    path('Group/', views.getGroup, name='dashboard-Group'),
+    path('Group/delete/<int:pk>/', views.GroupDelete, name='dashboard-Group-delete'),
+    path('Group/edit/<int:pk>/', views.GroupEdit, name='dashboard-Group-edit'),
+    path('Stagier/', views.getStagier, name='dashboard-Stagier'),
+    path('Stagier/delete/<int:pk>/', views.StagierDelete, name='dashboard-Stagier-delete'),
+    path('Stagier/edit/<int:pk>/', views.StagierEdit, name='dashboard-Stagier-edit'),
+
 ]
