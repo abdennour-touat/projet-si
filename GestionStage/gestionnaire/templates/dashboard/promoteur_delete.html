@@ -1,5 +1,6 @@
 {% extends 'partials/base.html' %} 
-
+{% block title %}Supprimer Promoteur{% endblock %}
+{% load crispy_forms_tags %}
 {% block content %}  
 <div class="row my-4">
     <div class="col-md-6 offset-md-3">
@@ -11,7 +12,7 @@
                     <h4> voulez vous vraiment supprimer l'eregistrement? {{ item }}?</h4>
                 </div>
                 {% csrf_token %}
-                {{ form }}
+                {{ form|crispy }}
                 <a class="btn btn-secondary btn-sm" href="{% url 'dashboard-promoteur' %}">Cancel</a>
                 <input class="btn btn-danger btn-sm" type="submit" value="Confirm">
             </form>
