@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
-from .forms import EncadreurForm, PromoteurForm
-from .models import Encadreur, Promoteur
+from .forms import EncadreurForm, PromoteurForm,OrganismeForm
+from .models import Encadreur, Promoteur,Organisme
 
 
 
@@ -107,3 +107,48 @@ def encadreurEdit(request, pk):
     return render(request, 'dashboard/encadreur_edit.html', context)
 
 
+
+
+
+
+def organisme(request):
+    items = Organisme.objects.all()
+    if request.method == 'POST':
+        form = OrganismeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard-Organisme')
+    else:
+        form = OrganismeForm()
+    context = {
+        'items': items,
+        'form' : form,
+    }
+    return render(request, 'dashboard/Organisme.html', context)
+
+
+def OrganismeDelete(request, pk):
+    item = Organisme.objects.get(id=pk)
+    if request.method == 'POST':
+        item.delete()
+        return redirect('dashboard-Organisme')
+    context = {
+        'item': item
+    }
+    return render(request, 'dashboard/Organisme_delete.html',context)
+
+
+def OrganismeEdit(request, pk):
+    item = Organisme.objects.get(id=pk)
+    if request.method == 'POST':
+        form = OrganismeForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard-Organisme')
+    else:
+        form = OrganismeForm(instance=item)
+    
+    context = {
+        'form': form,
+    }
+    return render(request, 'dashboard/Organisme_edit.html', context)

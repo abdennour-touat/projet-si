@@ -20,7 +20,7 @@ class typeStage(models.Model):
     duree=models.PositiveIntegerField(help_text="Semaine")
 
     def __str__(self):
-        return f'{self.typeStage}'
+        return f'{self.typeStage}-{self.duree}'
 
 class Stage(models.Model):
     nomStage=models.CharField(max_length=120)

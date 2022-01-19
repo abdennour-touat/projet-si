@@ -1,0 +1,42 @@
+{% extends 'partials/base.html' %} 
+{% block title %}Organisme Page{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}  
+<div class="row my-4">
+    <div class="col-md-3">
+        <div class="card card-body">
+            <h5>Ajouter Organisme</h5>
+            <hr>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input class="btn btn-success btn-block" type="submit" value="Add">
+            </form>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <table class="table bg-white">
+            <thead class="bg-info text-white">
+                <tr>
+                    <th scope="col">Nom Organisme</th>
+                    <th scope="col">Type Organisme</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.nomOrganisme }}</td>
+                    <td>{{ item.typeOrganisme }}</td>
+                    <td>
+                        <a class="btn btn-info btn-sm mr-2"
+                            href="{% url 'dashboard-Organisme-edit' item.id %}">Edit</a>
+                        <a class="btn btn-danger btn-sm ml-2"
+                            href="{% url 'dashboard-Organisme-delete' item.id %}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

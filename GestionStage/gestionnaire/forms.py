@@ -1,5 +1,5 @@
 from django import forms
-from .models import Promoteur, Encadreur
+from .models import Organisme, Promoteur, Encadreur
 
 
 class EncadreurForm(forms.ModelForm):
@@ -11,6 +11,11 @@ class EncadreurForm(forms.ModelForm):
 class PromoteurForm(forms.ModelForm):
     class Meta:
         model = Promoteur
+        fields = '__all__'
+
+class OrganismeForm(forms.ModelForm):
+    class Meta:
+        model = Organisme
         fields = '__all__'
 
 
