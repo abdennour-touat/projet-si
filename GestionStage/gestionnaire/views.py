@@ -5,7 +5,7 @@ from .models import Encadreur, Promoteur
 
 
 def index(request):
-    return render(request,"index.html")
+    return render(request,"dashboard/index.html")
 
 
 
@@ -28,7 +28,7 @@ def promoteur(request):
         'items': items,
         'form' : form,
     }
-    return render(request, 'promoteur.html', context)
+    return render(request, 'dashboard/promoteur.html', context)
 
 
 def promoteurDelete(request, pk):
@@ -39,7 +39,7 @@ def promoteurDelete(request, pk):
     context = {
         'item': item
     }
-    return render(request, 'promoteur_delete.html',context)
+    return render(request, 'dashboard/promoteur_delete.html',context)
 
 
 def promoteurEdit(request, pk):
@@ -55,7 +55,7 @@ def promoteurEdit(request, pk):
     context = {
         'form': form,
     }
-    return render(request, 'promoteur_edit.html', context)
+    return render(request, 'dashboard/promoteur_edit.html', context)
 
 
 
@@ -78,7 +78,7 @@ def encadreur(request):
         'items': items,
         'form' : form,
     }
-    return render(request, 'encadreur.html', context)
+    return render(request, 'dashboard/encadreur.html', context)
 
 
 def encadreurDelete(request, pk):
@@ -89,7 +89,7 @@ def encadreurDelete(request, pk):
     context = {
         'item': item
     }    
-    return render(request, 'encadreur_delete.html', context)
+    return render(request, 'dashboard/encadreur_delete.html', context)
 
 
 def encadreurEdit(request, pk):
@@ -104,6 +104,6 @@ def encadreurEdit(request, pk):
     context = {
         'form': form,
     }
-    return render(request, 'encadreur_edit.html', context)
+    return render(request, 'dashboard/encadreur_edit.html', context)
 
 
