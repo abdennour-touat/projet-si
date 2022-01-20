@@ -1,8 +1,5 @@
-from asyncore import file_wrapper
-from dataclasses import fields
-from pyexpat import model
 from django import forms
-from .models import Organisme, Promoteur, Encadreur, Groupe, Stagier,Stage
+from .models import Groupe, Organisme, Promoteur, Encadreur, Stage, Stagier
 
 
 class EncadreurForm(forms.ModelForm):
@@ -31,11 +28,12 @@ class StagierForm (forms.ModelForm ):
         model = Stagier
         fields = '__all__'
 
+
+
 class StageForm(forms.ModelForm ):
     class Meta:
         model = Stage
         fields = '__all__'
-
 
 # class ActorSearchForm(forms.ModelForm):
 #     search_text =  forms.CharField(

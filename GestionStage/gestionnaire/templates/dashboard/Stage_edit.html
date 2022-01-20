@@ -1,5 +1,5 @@
 {% extends 'partials/base.html' %} 
-{% block title %}Modifier Stage{% endblock %}
+{% block title %}Modifier Stagier{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}  
 <div class="row my-4">
@@ -9,7 +9,7 @@
         <form method="POST">
             {% csrf_token %}
             {{ form|crispy }}
-            <a class="btn btn-secondary btn-sm" href="{% url 'dashboard-Stage' %}">Cancel</a>
+            <a class="btn btn-secondary btn-sm" href="{% url 'dashboard-Stagier' %}">Cancel</a>
             <input class="btn btn-info" type="submit" value="Confirm">
         </form>
     </div>
