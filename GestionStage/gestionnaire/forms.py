@@ -2,7 +2,7 @@ from asyncore import file_wrapper
 from dataclasses import fields
 from pyexpat import model
 from django import forms
-from .models import Organisme, Promoteur, Encadreur, Groupe, Stagier
+from .models import Organisme, Promoteur, Encadreur, Groupe, Stagier,Stage
 
 
 class EncadreurForm(forms.ModelForm):
@@ -29,6 +29,11 @@ class GroupeForm(forms.ModelForm):
 class StagierForm (forms.ModelForm ):
     class Meta:
         model = Stagier
+        fields = '__all__'
+
+class StageForm(forms.ModelForm ):
+    class Meta:
+        model = Stage
         fields = '__all__'
 
 

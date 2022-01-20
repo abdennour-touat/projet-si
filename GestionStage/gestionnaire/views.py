@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
-from .forms import EncadreurForm, PromoteurForm, OrganismeForm, GroupeForm, StagierForm
-from .models import Encadreur, Promoteur, Organisme, Groupe, Stagier
+from .forms import EncadreurForm, PromoteurForm, OrganismeForm, GroupeForm, StagierForm,StageForm
+from .models import Encadreur, Promoteur, Organisme, Groupe, Stage, Stagier
 
 
 def index(request):
@@ -219,3 +219,43 @@ def StagierEdit(request, pk):
         'form': form,
     }
     return render(request, 'dashboard/Stagier_edit.html', context)
+
+def stage(request):
+    items = Stage.objects.all()
+    if request.method == 'POST':
+        form = StageForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard-Stage')
+    else:
+        form = StageForm()
+    context = {
+        'items': items,
+        'form': form,
+    }
+    return render(request, 'dashboard/Stage.html', context)
+
+def StageDelete(request, pk):
+    item = Stage.objects.get(id=pk)
+    if request.method == 'POST':
+        item.delete()
+        return redirect('dashboard-Stage')
+    context = {
+        'item': item
+    }
+    return render(request, 'dashboard/Stage_delete.html', context)
+
+def StageEdit(request, pk):
+    item = Stage.objects.get(id=pk)
+    if request.method == 'POST':
+        form = StageForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard-Stage')
+    else:
+        form = StageForm(instance=item)
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'dashboard/Stage_edit.html', context)

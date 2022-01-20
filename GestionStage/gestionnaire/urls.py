@@ -18,5 +18,7 @@ urlpatterns = [
     path('Stagier/', views.getStagier, name='dashboard-Stagier'),
     path('Stagier/delete/<int:pk>/', views.StagierDelete, name='dashboard-Stagier-delete'),
     path('Stagier/edit/<int:pk>/', views.StagierEdit, name='dashboard-Stagier-edit'),
-
+    path('Stage/', views.stage, name='dashboard-Stage'),
+    path('Stage/edit/<int:pk>/', views.StageEdit, name='dashboard-Stage-edit'),
+    path('Stage/delete/<int:pk>/', views.StageDelete, name='dashboard-Stage-delete'),
 ]
