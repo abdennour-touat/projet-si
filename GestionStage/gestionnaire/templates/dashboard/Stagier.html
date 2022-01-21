@@ -14,10 +14,16 @@
             </form>
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-12">
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" name="q" type="search" placeholder="Rechercher" aria-label="Rechercher">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+        </form>
         <table class="table bg-white">
             <thead class="bg-info text-white">
                 <tr>
+                    <th scope="col">Matricule</th>
+                    <th scope="col">Annee Stage</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Prenom</th>
                     <th scope="col">Telephone</th>
@@ -30,6 +36,8 @@
             <tbody>
                 {% for item in items %}
                 <tr>
+                    <td>{{ item.matricule }}</td>
+                    <td>{{ item.anneeStage }}</td>
                     <td>{{ item.nomStagier }}</td>
                     <td>{{ item.prenomStagier }}</td>
                     <td>{{ item.numeroTelephoneStagier }}</td>
@@ -38,18 +46,14 @@
                     <td>{{ item.niveauDetude }}</td>
                     <td>
                         <a class="btn btn-info btn-sm mr-2"
-                            href="{% url 'dashboard-Stagier-edit' item.id %}">Edit</a>
+                            href="{% url 'dashboard-Stagier-edit' item.matricule %}">Edit</a>
                         <a class="btn btn-danger btn-sm ml-2"
-                            href="{% url 'dashboard-Stagier-delete' item.id %}">Delete</a>
+                            href="{% url 'dashboard-Stagier-delete' item.matricule %}">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Rechercher">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
-        </form>
     </div>
 </div>
 {% endblock %}
