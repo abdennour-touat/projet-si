@@ -3,33 +3,32 @@
 <a class="mx-auto"  href="{% url 'dashboard-index' %}"><img class="image" src="https://lria.usthb.dz/sites/default/files/inline-images/USTHB_Logo%20WHITE.png" alt="usth fucking b" ></a>
 
 
-<nav class="navbar navbar-expand-lg navbar-light  mx-auto   shadow-lg p-0" style="margin-top: 1.5rem; background-color: #81A1C1; color: white; border-radius: 35px 35px; width: 69%;">
+<nav class="mx-auto" style="margin-top: 1rem; color: white; width: 80vw; ">
     <!-- <a class="navbar-brand text-white" href="#">ESI</a> -->
     <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button> -->
-  
-    <div class="collapse navbar-collapse mx-auto" id="navbarSupportedContent">
-      <ul class="navbar-nav mx-auto  text-white">
+    <div class="shadow-lg " id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto  text-white d-flex flex-row justify-content-around"style=" background-color: #81A1C1; border-radius: 35px 35px;">
         <!-- <li class="nav-item active">
           <a class="nav-link text-white" href="{% url 'dashboard-index' %}"> Home <span class="sr-only">(current)</span></a>
         </li> -->
-        <li class="nav-item active items" style="padding-left: 78px;border-radius: 35px 0 0 35px  ;">
+        <li class=" active items" style="padding-left: 5%;border-radius: 35px 0 0 35px  ;">
           <a class="nav-link text-white  "  href="{% url 'dashboard-Stage' %}">Stages</a>
         </li>
-        <li class="nav-item active items">
+        <li class=" active items">
           <a class="nav-link text-white text-lg" href="{% url 'dashboard-Group' %}">Groupes</a>
         </li>
-        <li class="nav-item active items">
+        <li class=" active items">
           <a class="nav-link text-white text-lg"  href="{% url 'dashboard-Stagier' %}">Stagiers</a>
         </li>
-        <li class="nav-item active items">
+        <li class="active items">
           <a class="nav-link text-white text-lg"href="{% url 'dashboard-encadreur' %}">Encadreurs</a>
         </li>
-        <li class="nav-item active items">
+        <li class="active items">
           <a class="nav-link text-white text-lg" href="{% url 'dashboard-promoteur' %}">Promoteurs</a>
         </li>
-        <li class="nav-item active items" style="padding-right: 78px;border-radius: 0 35px  35px 0  ;">
+        <li class=" active items" style="padding-right: 5%;border-radius: 0 35px  35px 0  ;">
           <a class="nav-link text-white text-lg" href="{% url 'dashboard-Organisme' %}">Organismes </a>
         </li>
         <!-- <li class="nav-item dropdown">
@@ -52,8 +51,9 @@
   </nav>
   <style>
     .items{
-      
-      padding: 5px 40px;
+      text-align: center;
+      flex: 1;
+      padding: 5px 0;
       font-size: 20px!important;
       transition: 0.3s;
     }
@@ -65,7 +65,7 @@
       display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 155px;
+  width: 130px;
     }
   </style>
     

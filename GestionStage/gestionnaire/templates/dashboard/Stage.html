@@ -1,49 +1,101 @@
-{% extends 'partials/base.html' %} 
-{% block title %}Stage Page{% endblock %}
-{% load crispy_forms_tags %}
-{% block content %}  
-<div class="row my-4">
-    <div class="col-md-3">
-        <div class="card card-body">
+{% extends 'partials/base.html' %} {% block title %}Stage Page{% endblock %}
+{%load crispy_forms_tags %} {% block content %}
+<!-- Modal -->
+<div
+  class="modal fade row"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="">
+          <div class="card card-body">
             <h5>Ajouter Stage</h5>
-            <hr>
-            <form method="POST">
-                {% csrf_token %}
-                {{ form|crispy }}
-                <input class="btn btn-success btn-block" type="submit" value="Add">
+            <hr />
+            <form method="POST">{% csrf_token %} {{ form|crispy }}
+                <input class="btn btn-success " type="submit" value="Add" />
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Close
+                  </button>
             </form>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="col-md-9">
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" name="q" type="search" placeholder="Rechercher" aria-label="Rechercher">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
-        </form>
-        <table class="table bg-white">
-            <thead class="bg-info text-white">
-                <tr>
-                    <th scope="col">Nom Stage</th>
-                    <th scope="col">Type Stage</th>
-                    <th scope="col">id Organisme</th>
-                    <th scope="col">option</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in items %}
-                <tr>
-                    <td>{{ item.nomStage }}</td>
-                    <td>{{ item.typeStage }}</td>
-                    <td>{{ item.idOrganisme }}</td>
-                    <td>
-                        <a class="btn btn-info btn-sm mr-2"
-                            href="{% url 'dashboard-Stage-edit' item.id %}">Edit</a>
-                        <a class="btn btn-danger btn-sm ml-2"
-                            href="{% url 'dashboard-Stage-delete' item.id %}">Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+  </div>
+</div>
+<div class="text-center my-4">
+  <div >
+      <div class="text-center ">
+
+    <form class="form mb-3 d-flex w-auto ">
+      <input
+        class="form-control mr-sm-2"
+        name="q"
+        type="search"
+        placeholder="Rechercher"
+        aria-label="Rechercher"
+      />
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+        Recherche
+      </button>
+    </form>
+      </div>
+    <table class="table bg-white " style=" height:400px; overflow:scroll;">
+      <thead class="bg-info text-white">
+        <tr>
+          <th scope="col">Nom Stage</th>
+          <th scope="col">Type Stage</th>
+          <th scope="col">id Organisme</th>
+          <th scope="col">option</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td>{{ item.nomStage }}</td>
+          <td>{{ item.typeStage }}</td>
+          <td>{{ item.idOrganisme }}</td>
+          <td>
+            <a
+              class="btn btn-info btn-sm mr-2"
+              href="{% url 'dashboard-Stage-edit' item.id %}"
+              >Edit</a
+            >
+            <a
+              class="btn btn-danger btn-sm ml-2"
+              href="{% url 'dashboard-Stage-delete' item.id %}"
+              >Delete</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <button
+    type="button"
+    class="btn btn-primary text-center"
+    data-toggle="modal"
+    style="font-size: 20px;"
+    data-target="#exampleModal"
+  >
+    Ajouter Stage
+  </button>
 </div>
 {% endblock %}
