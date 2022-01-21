@@ -1,23 +1,41 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">ESI</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+<a style="font-size: 48px;text-decoration: none; color: white;" href="{% url 'dashboard-index' %}"> <p style="text-align: center;margin-top: 35px;">ESI</p></a>
+
+<nav class="navbar navbar-expand-lg navbar-light  mx-auto   shadow-lg p-0" style="margin-top: 3rem; background-color: #81A1C1; color: white; border-radius: 35px 35px; width: 69%;">
+    <!-- <a class="navbar-brand text-white" href="#">ESI</a> -->
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
   
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="{% url 'dashboard-index' %}"> Home <span class="sr-only">(current)</span></a>
+    <div class="collapse navbar-collapse mx-auto" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto  text-white">
+        <!-- <li class="nav-item active">
+          <a class="nav-link text-white" href="{% url 'dashboard-index' %}"> Home <span class="sr-only">(current)</span></a>
+        </li> -->
+        <li class="nav-item active items" style="padding-left: 65px;border-radius: 35px 0 0 35px  ;">
+          <a class="nav-link text-white  "  href="{% url 'dashboard-Stage' %}">Stages</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+        <li class="nav-item active items">
+          <a class="nav-link text-white text-lg" href="{% url 'dashboard-Group' %}">Groupes</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+        <li class="nav-item active items">
+          <a class="nav-link text-white text-lg"  href="{% url 'dashboard-Stagier' %}">Stagiers</a>
+        </li>
+        <li class="nav-item active items">
+          <a class="nav-link text-white text-lg"href="{% url 'dashboard-encadreur' %}">Encadreurs</a>
+        </li>
+        <li class="nav-item active items">
+          <a class="nav-link text-white text-lg" href="{% url 'dashboard-promoteur' %}">Promoteurs</a>
+        </li>
+        <li class="nav-item active items" style="border-radius: 0 35px  35px 0  ;">
+          <a class="nav-link text-white text-lg" href="{% url 'dashboard-Organisme' %}">Organismes </a>
+        </li>
+        <!-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
             Stage
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{% url 'dashboard-Stage' %}">Stages</a>
+            <a class="dropdown-item  " href="{% url 'dashboard-Stage' %}">Stages</a>
             <a class="dropdown-item" href="{% url 'dashboard-Group' %}">Groupes</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{% url 'dashboard-Stagier' %}">Stagiers</a>
@@ -26,7 +44,20 @@
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{% url 'dashboard-Organisme' %}">Organismes</a>
           </div>
-        </li>
+        </li> -->
       </ul>
     </div>
   </nav>
+  <style>
+    .items{
+      
+      padding: 10px 40px;
+      font-size: 22px!important;
+      transition: 0.3s;
+    }
+    .items:hover{
+      background-color: #88C0D0;
+      
+    }
+    
+  </style>
