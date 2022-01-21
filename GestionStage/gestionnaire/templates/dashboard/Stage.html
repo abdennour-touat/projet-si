@@ -3,7 +3,7 @@
 <!-- Modal -->
 <div
   class="modal fade row"
-  id="exampleModal"
+  id="addModal"
   tabindex="-1"
   role="dialog"
   aria-labelledby="exampleModalLabel"
@@ -27,11 +27,16 @@
           <div class="card card-body">
             <h5>Ajouter Stage</h5>
             <hr />
-            <form method="POST">{% csrf_token %} {{ form|crispy }}
-                <input class="btn btn-success " type="submit" value="Add" />
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    Close
-                  </button>
+            <form method="POST">
+              {% csrf_token %} {{ form|crispy }}
+              <input class="btn btn-success" type="submit" value="Add" />
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
             </form>
           </div>
         </div>
@@ -39,63 +44,181 @@
     </div>
   </div>
 </div>
-<div class="text-center my-4">
-  <div >
-      <div class="text-center ">
-
-    <form class="form mb-3 d-flex w-auto ">
-      <input
-        class="form-control mr-sm-2"
-        name="q"
-        type="search"
-        placeholder="Rechercher"
-        aria-label="Rechercher"
-      />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-        Recherche
-      </button>
-    </form>
+<div
+  class="modal fade row"
+  id="editModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-    <table class="table bg-white " style=" height:400px; overflow:scroll;">
-      <thead class="bg-info text-white">
-        <tr>
-          <th scope="col">Nom Stage</th>
-          <th scope="col">Type Stage</th>
-          <th scope="col">id Organisme</th>
-          <th scope="col">option</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for item in items %}
-        <tr>
-          <td>{{ item.nomStage }}</td>
-          <td>{{ item.typeStage }}</td>
-          <td>{{ item.idOrganisme }}</td>
-          <td>
-            <a
-              class="btn btn-info btn-sm mr-2"
-              href="{% url 'dashboard-Stage-edit' item.id %}"
-              >Edit</a
-            >
-            <a
-              class="btn btn-danger btn-sm ml-2"
-              href="{% url 'dashboard-Stage-delete' item.id %}"
-              >Delete</a
-            >
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+      <div class="modal-body">
+        <div class="">
+          <div class="col-md-6 offset-md-3 p-3 bg-white">
+            <h3>Edit Item</h3>
+            <hr />
+            <form method="POST">
+              <a
+                class="btn btn-secondary btn-sm"
+                href="{% url 'dashboard-Stagier' %}"
+                >Cancel</a
+              >
+              <input class="btn btn-info" type="submit" value="Confirm" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade row"
+  id="deleteModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="">
+          <div class="col-md-6 offset-md-3">
+            <div class="border p-3 bg-white">
+              <h3>Delete Item</h3>
+              <hr />
+              <form method="POST">
+                <div class="alert alert-danger">
+                  <h4>
+                    voulez vous vraiment supprimer l'eregistrement? {{ item }}?
+                  </h4>
+                </div>
+                {% csrf_token %} 
+                <a
+                  class="btn btn-secondary btn-sm"
+                  href="{% url 'dashboard-Stage' %}"
+                  >Cancel</a
+                >
+                <input
+                  class="btn btn-danger btn-sm"
+                  type="submit"
+                  value="Confirm"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="text-center my-4">
+  <div>
+    <div class="text-center">
+      <form class="form mb-3 d-flex w-auto">
+        <input
+          class="form-control mr-sm-2"
+          name="q"
+          type="search"
+          placeholder="Rechercher"
+          aria-label="Rechercher"
+        />
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          Recherche
+        </button>
+      </form>
+    </div>
+    <div style="height: 550px; overflow: scroll">
+      <table class="table bg-white mb-0">
+        <thead class="bg-info text-white" style="position: sticky; top: 0">
+          <tr>
+            <th scope="col">Nom Stage</th>
+            <th scope="col">Type Stage</th>
+            <th scope="col">id Organisme</th>
+            <th scope="col">option</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+          <tr>
+            <td>{{ item.nomStage }}</td>
+            <td>{{ item.typeStage }}</td>
+            <td>{{ item.idOrganisme }}</td>
+            <td>
+              <a
+                class="btn btn-info btn-sm mr-2 ModalEdit"
+                data-popup-url="{% url 'dashboard-Stage-edit' item.id %}"
+               
+                data-toggle="modal"
+                data-target="#editModal"
+                
+                >Edit</a
+              >
+              <a
+                class="btn btn-danger btn-sm ml-2 ModalDelete"
+                data-popup-url="{% url 'dashboard-Stage-delete' item.id %}"
+                data-toggle="modal"
+                data-target="#deleteModal"
+                >Delete</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
   <button
     type="button"
-    class="btn btn-primary text-center"
+    class="btn btn-primary text-center mt-3"
     data-toggle="modal"
-    style="font-size: 20px;"
-    data-target="#exampleModal"
+    style="font-size: 20px"
+    data-target="#addModal"
   >
     Ajouter Stage
   </button>
 </div>
+<script>
+   
+    $(".ModalEdit").on("click",function (e) {
+      e.preventDefault();
+      var $popup = $("#editModal");
+      var popup_url = $(this).data("popup-url");
+      $(".modal-body", $popup).load(popup_url, function () {
+        $popup.modal("show");
+      });
+    } )
+    $(document).on("click", ".Modaldelete", function (e) {
+      e.preventDefault();
+      var $popup = $("#deleteModal");
+      var popup_url = $(this).data("popup-url");
+      $(".modal-body", $popup).load(popup_url, function () {
+        $popup.modal("show");
+      });
+    }); 
+  </script>
 {% endblock %}
