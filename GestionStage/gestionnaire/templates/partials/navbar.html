@@ -1,7 +1,9 @@
 
-<a style="font-size: 48px;text-decoration: none; color: white;" href="{% url 'dashboard-index' %}"> <p style="text-align: center;margin-top: 35px;">ESI</p></a>
+<!-- <a style="font-size: 48px;text-decoration: none; color: white;" href="{% url 'dashboard-index' %}"> <p style="text-align: center;margin-top: 35px;">ESI</p></a> -->
+<a class="mx-auto"  href="{% url 'dashboard-index' %}"><img class="image" src="https://lria.usthb.dz/sites/default/files/inline-images/USTHB_Logo%20WHITE.png" alt="usth fucking b" ></a>
 
-<nav class="navbar navbar-expand-lg navbar-light  mx-auto   shadow-lg p-0" style="margin-top: 3rem; background-color: #81A1C1; color: white; border-radius: 35px 35px; width: 69%;">
+
+<nav class="navbar navbar-expand-lg navbar-light  mx-auto   shadow-lg p-0" style="margin-top: 1.5rem; background-color: #81A1C1; color: white; border-radius: 35px 35px; width: 69%;">
     <!-- <a class="navbar-brand text-white" href="#">ESI</a> -->
     <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -59,14 +61,13 @@
       background-color: #88C0D0;
       
     }
-    
+    .image{
+      display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 170px;
+    }
   </style>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a class="nav-link text-black" href="{% url 'user-logout' %}">Logout</a>
-        </li>
-      </ul>
     
-      {% endif %}
   </div>
 </nav>
