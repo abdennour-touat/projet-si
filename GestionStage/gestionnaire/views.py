@@ -16,7 +16,7 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     stages_count=[]
     for organ in Organisme.objects.filter(typeOrganisme="Partenaire"):
-        stages_count.append(Stage.objects.filter(idOrganisme=organ).count()) 
+        stages_count.append(Stagier.objects.filter(idOrganisme=organ).count()) 
     organismes =Organisme.objects.filter(typeOrganisme="Partenaire") 
     context = {
         'organismes':organismes,
