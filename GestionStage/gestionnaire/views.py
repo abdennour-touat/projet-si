@@ -1,5 +1,6 @@
 from itertools import product
 from tkinter.tix import Select
+from typing import Any
 from django.shortcuts import redirect, render
 from django.template import context
 from .forms import EncadreurForm, GroupeForm, PromoteurForm,OrganismeForm, StageForm, StagierForm
@@ -10,13 +11,13 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='user-login')
 def index(request):
+    for organ in Organisme.objects.all():
+        stages_count =Stage.objects.filter(idOrganisme=organ).count()
     organismes =Organisme.objects.all() 
-    stages =Stage.objects.all()
-   
     context = {
         'organismes':organismes,
-        'stages':stages,
-        
+        'stages_count':stages_count,
+        'organ':organ,
 
     }
     return render(request,"dashboard/index.html",context)
@@ -350,9 +351,7 @@ def StageEdit(request, pk):
             return redirect('dashboard-Stage')
     else:
         form = StageForm(instance=item)
-
     context = {
-        'item': item,
         'form': form,
     }
     return render(request,'dashboard/Stage_edit.html', context)
