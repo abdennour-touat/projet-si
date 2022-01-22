@@ -15,15 +15,9 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='user-login')
 def index(request):
     stages_count=[]
-<<<<<<< Updated upstream
     for organ in Organisme.objects.filter(typeOrganisme="Partenaire"):
         stages_count.append(Stage.objects.filter(idOrganisme=organ).count()) 
     organismes =Organisme.objects.filter(typeOrganisme="Partenaire") 
-=======
-    for organ in Organisme.objects.all():
-        stages_count.append(Stage.objects.filter(idOrganisme=organ).count()) 
-    organismes =Organisme.objects.all() 
->>>>>>> Stashed changes
     context = {
         'organismes':organismes,
         'stages_count':stages_count,
