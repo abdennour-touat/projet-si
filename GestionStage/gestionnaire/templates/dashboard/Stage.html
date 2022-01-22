@@ -65,7 +65,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" id="editbody">
         
       </div>
     </div>
@@ -167,8 +167,8 @@
 <script>
    
     $(".ModalEdit").on("click",function (e) {
-      e.preventDefault();
-      var $popup = $("#editModal");
+      
+      var $popup = $("#deleteModal");
       var popup_url = $(this).data("popup-url");
       $(".modal-body", $popup).load(popup_url, function () {
         $popup.modal("show");
@@ -182,6 +182,7 @@
       $(".modal-body", $popup).load(popup_url, function () {
         
         $popup.modal("show");
+        $("#editbody").html(popup_url)
       });
     }); 
  

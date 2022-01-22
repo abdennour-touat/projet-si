@@ -352,6 +352,7 @@ def StageEdit(request, pk):
         form = StageForm(instance=item)
 
     context = {
+        'item': item,
         'form': form,
     }
     return render(request,'dashboard/Stage_edit.html', context)
