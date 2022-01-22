@@ -1,20 +1,40 @@
-{% block title %}Supprimer Organisme{% endblock %}
-{% block content %}  
+{% block title %}Supprimer Organisme{% endblock %} {% load crispy_forms_tags %}
+{% block content %}
 <div class="row my-4">
-    <div class="col-md-6 offset-md-3">
-        <div class="border p-3 bg-white">
-            <h3>Delete Item</h3>
-            <hr>
-            <form method="POST">
-                <div class="alert alert-danger">
-                    <h4> voulez vous vraiment supprimer l'eregistrement? {{ item }}?</h4>
-                </div>
-                {% csrf_token %}
-                {{ form|crispy }}
-                <a class="btn btn-secondary btn-sm" href="{% url 'dashboard-Stage' %}">Cancel</a>
-                <input class="btn btn-danger btn-sm" type="submit" value="Confirm">
-            </form>
+  <div class="col-md-6 offset-md-3">
+    <div class="border p-3 bg-white">
+      <h3>Delete Item</h3>
+      <hr />
+      <form method="POST" action="{% url 'dashboard-Stage-delete' item.id %}">
+        <div class="alert alert-danger">
+          <h4>voulez vous vraiment supprimer l'eregistrement? {{ item }}?</h4>
         </div>
+        {% csrf_token %} {{ form|crispy }}
+        <a class="btn btn-secondary btn-sm" href="{% url 'dashboard-Stage' %}"
+          >Cancel</a
+        >
+        <input
+          class="btn btn-danger btn-sm"
+          id="delete"
+          type="submit"
+          value="Confirm"
+          data-popup-url="{% url 'dashboard-Stage-delete' item.id %}"
+        />
+      </form>
     </div>
+  </div>
 </div>
+<script>
+  $("#delete").on("click", function (e) {
+    var popup_url = $(this).data("popup-url");
+    const csrftoken = document.querySelector(
+      "[name=csrfmiddlewaretoken]"
+    ).value;
+    $.ajax({
+      headers: { "X-CSRFToken": csrftoken },
+      url: popup_url,
+      type: "DELETE",
+    });
+  });
+</script>
 {% endblock %}

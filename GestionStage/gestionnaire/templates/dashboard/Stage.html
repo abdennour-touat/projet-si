@@ -66,20 +66,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="">
-          <div class="col-md-6 offset-md-3 p-3 bg-white">
-            <h3>Edit Item</h3>
-            <hr />
-            <form method="POST">
-              <a
-                class="btn btn-secondary btn-sm"
-                href="{% url 'dashboard-Stagier' %}"
-                >Cancel</a
-              >
-              <input class="btn btn-info" type="submit" value="Confirm" />
-            </form>
-          </div>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -106,32 +93,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="">
-          <div class="col-md-6 offset-md-3">
-            <div class="border p-3 bg-white">
-              <h3>Delete Item</h3>
-              <hr />
-              <form method="POST">
-                <div class="alert alert-danger">
-                  <h4>
-                    voulez vous vraiment supprimer l'eregistrement? {{ item }}?
-                  </h4>
-                </div>
-                {% csrf_token %} 
-                <a
-                  class="btn btn-secondary btn-sm"
-                  href="{% url 'dashboard-Stage' %}"
-                  >Cancel</a
-                >
-                <input
-                  class="btn btn-danger btn-sm"
-                  type="submit"
-                  value="Confirm"
-                />
-              </form>
-            </div>
-          </div>
-        </div>
+        {% csrf_token %} 
       </div>
     </div>
   </div>
@@ -212,13 +174,16 @@
         $popup.modal("show");
       });
     } )
-    $(document).on("click", ".Modaldelete", function (e) {
+    $(".ModalDelete").on("click", function (e) {
       e.preventDefault();
       var $popup = $("#deleteModal");
       var popup_url = $(this).data("popup-url");
+      
       $(".modal-body", $popup).load(popup_url, function () {
+        
         $popup.modal("show");
       });
     }); 
+ 
   </script>
 {% endblock %}
