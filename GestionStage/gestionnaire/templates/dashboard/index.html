@@ -4,11 +4,13 @@
 {% block content %}
 
 <!--Graphs-->
-<div class="container">
-    <div class="row my-5">
-        <div class="col-md-6">
-            <div class="bg-white">
-                <canvas id="myChart1" width="400" height="300"></canvas>
+
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-lg-4 border border-4">
+            <div>
+                <canvas id="myChart1" width="200" height="200"></canvas>
                 <script>
                     var ctx = document.getElementById('myChart1').getContext('2d');
                     var myChart1 = new Chart(ctx, {
@@ -50,9 +52,9 @@
                 </script>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-lg-4 char2 border border-3">
             <div class="bg-white">
-                <canvas id="myChart" width="400" height="300"></canvas>
+                <canvas id="myChart"  height="200"></canvas>
                 <script>
                     var ctx = document.getElementById('myChart').getContext('2d');
                     var myChart = new Chart(ctx, {
@@ -96,5 +98,18 @@
         </div>
     </div>
 </div>
+<style>
+    .container-fluid{
+        background-color: #88C0D0;
+        padding: 6rem;
+        margin-top: 6rem;
+    }
+    .char2{
+        margin-left: 16rem;
+        margin-top: 6rem;
+        border-color: black;
+        
+    }
+</style>
 <!--End Graphs-->
 {% endblock %}
