@@ -58,12 +58,12 @@
                 <script>
                     var ctx = document.getElementById('myChart').getContext('2d');
                     var myChart = new Chart(ctx, {
-                        type: 'bar',
+                        type: 'doughnut',
                         data: {
                             labels: [{% for organisme in organismes %}'{{organisme.nomOrganisme}}', {% endfor %}],
                             datasets: [{
                                 label: 'Classement des organismes partenaires',
-                                data: [{% for organisme in organismes %}{{stages_count}},{% endfor %}],
+                                data: [{% for stage in stages_count %}{{stage}},{% endfor %}],
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 1)',
                                     'rgba(54, 162, 235, 1)',
