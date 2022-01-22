@@ -24,17 +24,5 @@
     </div>
   </div>
 </div>
-<script>
-  $("#delete").on("click", function (e) {
-    var popup_url = $(this).data("popup-url");
-    const csrftoken = document.querySelector(
-      "[name=csrfmiddlewaretoken]"
-    ).value;
-    $.ajax({
-      headers: { "X-CSRFToken": csrftoken },
-      url: popup_url,
-      type: "DELETE",
-    });
-  });
-</script>
+
 {% endblock %}
