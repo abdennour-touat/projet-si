@@ -62,13 +62,14 @@ class Groupe(models.Model):
 
 class Stagier(models.Model):
     matricule = models.CharField("Matricule",max_length=12,primary_key=True)
-    anneeStage = models.CharField("Annee du stage",max_length=12,unique=True)
+    anneeStage = models.CharField("Annee du stage",max_length=12)
     nomStagier = models.CharField("Nom",max_length=120)
     prenomStagier = models.CharField("Prenom",max_length=120)
     niveauDetude = models.CharField("Niveau d'etude",max_length=80)
     idGroupe = models.ForeignKey(Groupe, on_delete=models.CASCADE, verbose_name="ID groupe")
     emailStagier = models.EmailField("email",max_length=100)
     numeroTelephoneStagier = PhoneNumberField("Numero de telephone",unique = False, null = False, blank = False)
+    idOrganisme=models.ForeignKey(Organisme, on_delete=models.CASCADE, verbose_name="Organisme")
     
     def __str__(self):
         return f'{self.nomStagier}-{self.prenomStagier}'
