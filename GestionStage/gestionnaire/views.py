@@ -1,4 +1,6 @@
-from itertools import product
+from ast import And
+from itertools import count, product
+from select import select
 from tkinter.tix import Select
 from typing import Any
 from django.shortcuts import redirect, render
@@ -9,11 +11,13 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 
 
+
 @login_required(login_url='user-login')
 def index(request):
-    for organ in Organisme.objects.all():
-        stages_count =Stage.objects.filter(idOrganisme=organ).count()
-    organismes =Organisme.objects.all() 
+    stages_count=[]
+    for organ in Organisme.objects.filter(typeOrganisme="Partenaire"):
+        stages_count.append(Stage.objects.filter(idOrganisme=organ).count()) 
+    organismes =Organisme.objects.filter(typeOrganisme="Partenaire") 
     context = {
         'organismes':organismes,
         'stages_count':stages_count,
