@@ -1,47 +1,178 @@
-{% extends 'partials/base.html' %} 
-{% block title %}Organisme Page{% endblock %}
-{% load crispy_forms_tags %}
-{% block content %}  
-<div class="row my-4">
-    <div class="col-md-3">
-        <div class="card card-body">
+{% extends 'partials/base.html' %} {% block title %}Organisme Page{% endblock %}
+{% load crispy_forms_tags %} {% block content %}
+<div
+  class="modal fade row"
+  id="addModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="">
+          <div class="card card-body">
             <h5>Ajouter Organisme</h5>
-            <hr>
+            <hr />
             <form method="POST">
-                {% csrf_token %}
-                {{ form|crispy }}
-                <input class="btn btn-success btn-block" type="submit" value="Add">
+              {% csrf_token %} {{ form|crispy }}
+              <input class="btn btn-success" type="submit" value="Add" />
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
             </form>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="col-md-9">
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" name="q" type="search" placeholder="Rechercher" aria-label="Rechercher">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
-        </form>
-        <table class="table bg-white">
-            <thead class="bg-info text-white">
-                <tr>
-                    <th scope="col">Nom Organisme</th>
-                    <th scope="col">Type Organisme</th>
-                    <th scope="col">option</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in items %}
-                <tr>
-                    <td>{{ item.nomOrganisme }}</td>
-                    <td>{{ item.typeOrganisme }}</td>
-                    <td>
-                        <a class="btn btn-info btn-sm mr-2"
-                            href="{% url 'dashboard-Organisme-edit' item.id %}">Edit</a>
-                        <a class="btn btn-danger btn-sm ml-2"
-                            href="{% url 'dashboard-Organisme-delete' item.id %}">Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+  </div>
 </div>
+<div
+  class="modal fade row"
+  id="editModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="editbody"></div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade row"
+  id="deleteModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">{% csrf_token %}</div>
+    </div>
+  </div>
+</div>
+<div class="text-center my-4">
+  <div>
+    <div class="text-center">
+      <form class="form mb-3 d-flex w-auto">
+        <input
+          class="form-control mr-sm-2"
+          name="q"
+          type="search"
+          placeholder="Rechercher"
+          aria-label="Rechercher"
+        />
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          Recherche
+        </button>
+      </form>
+      <div style="height: 550px; overflow: scroll">
+        <table class="table bg-white">
+          <thead class="bg-info text-white">
+            <tr>
+              <th scope="col">Nom Organisme</th>
+              <th scope="col">Type Organisme</th>
+              <th scope="col">option</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in items %}
+            <tr>
+              <td>{{ item.nomOrganisme }}</td>
+              <td>{{ item.typeOrganisme }}</td>
+              <td>
+                <a
+                  class="btn btn-info btn-sm mr-2 ModalEdit"
+                  data-popup-url="{% url 'dashboard-Organisme-edit' item.id %}"
+                  data-toggle="modal"
+                  data-target="#editModal"
+                  >Edit</a
+                >
+                <a
+                  class="btn btn-danger btn-sm ml-2 ModalDelete"
+                  data-popup-url="{% url 'dashboard-Organisme-delete' item.id %}"
+                  data-toggle="modal"
+                  data-target="#deleteModal"
+                  >Delete</a
+                >
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <button
+    type="button"
+    class="btn btn-primary text-center mt-3"
+    data-toggle="modal"
+    style="font-size: 20px"
+    data-target="#addModal"
+  >
+    Ajouter Groupe
+  </button>
+</div>
+<script>
+  $(".ModalEdit").on("click", function (e) {
+    var $popup = $("#deleteModal");
+    var popup_url = $(this).data("popup-url");
+    $(".modal-body", $popup).load(popup_url, function () {
+      $popup.modal("show");
+    });
+  });
+  $(".ModalDelete").on("click", function (e) {
+    e.preventDefault();
+    var $popup = $("#deleteModal");
+    var popup_url = $(this).data("popup-url");
+    console.log(popup_url);
+
+    $(".modal-body", $popup).load(popup_url, function () {
+      $popup.modal("show");
+      $("#editbody").html(popup_url);
+    });
+  });
+</script>
 {% endblock %}

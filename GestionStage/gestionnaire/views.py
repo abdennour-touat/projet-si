@@ -79,6 +79,7 @@ def promoteurEdit(request, pk):
         form = PromoteurForm(instance=item)
     
     context = {
+         'item': item,
         'form': form,
     }
     return render(request, 'dashboard/promoteur_edit.html', context)
@@ -133,6 +134,7 @@ def encadreurEdit(request, pk):
     else:
         form = EncadreurForm(instance=item)
     context = {
+         'item': item,
         'form': form,
     }
     return render(request, 'dashboard/encadreur_edit.html', context)
@@ -188,6 +190,7 @@ def OrganismeEdit(request, pk):
         form = OrganismeForm(instance=item)
     
     context = {
+         'item': item,
         'form': form,
     }
     return render(request, 'dashboard/Organisme_edit.html', context)
@@ -246,6 +249,7 @@ def GroupEdit(request, pk):
         form = GroupeForm(instance=item)
 
     context = {
+         'item': item,
         'form': form,
     }
     return render(request, 'dashboard/Group_edit.html', context)
@@ -301,6 +305,7 @@ def StagierEdit(request, pk):
         form = StagierForm(instance=item)
 
     context = {
+         'item': item,
         'form': form,
     }
     return render(request, 'dashboard/Stagier_edit.html', context)
@@ -356,6 +361,7 @@ def StageEdit(request, pk):
     else:
         form = StageForm(instance=item)
     context = {
+        'item' : item,
         'form': form,
     }
     return render(request,'dashboard/Stage_edit.html', context)
