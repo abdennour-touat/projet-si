@@ -14,7 +14,7 @@
                     var myChart1 = new Chart(ctx, {
                         type: 'pie',
                         data: {
-                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                            labels: ["{%for organisme in organismes %} '{{organisme.nomOrganisme}}', {% endfor%}"],
                             datasets: [{
                                 label: 'Products',
                                 data: [12, 19, 3, 5, 2, 3],

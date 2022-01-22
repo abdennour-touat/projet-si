@@ -1,4 +1,7 @@
+from itertools import product
+from tkinter.tix import Select
 from django.shortcuts import redirect, render
+from django.template import context
 from .forms import EncadreurForm, GroupeForm, PromoteurForm,OrganismeForm, StageForm, StagierForm
 from .models import Encadreur, Groupe, Promoteur,Organisme, Stage, Stagier
 from django.db.models import Q
@@ -7,7 +10,16 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='user-login')
 def index(request):
-    return render(request,"dashboard/index.html")
+    organismes =Organisme.objects.all() 
+    stages =Stage.objects.all()
+   
+    context = {
+        'organismes':organismes,
+        'stages':stages,
+        
+
+    }
+    return render(request,"dashboard/index.html",context)
 
 
 
