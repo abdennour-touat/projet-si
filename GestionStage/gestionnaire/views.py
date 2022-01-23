@@ -19,7 +19,8 @@ def index(request):
         stages_count.append(Stagier.objects.filter(idOrganisme=organ).count()) 
     organismes =Organisme.objects.filter(typeOrganisme="Partenaire") 
     anne=[]
-    anne= Stagier.objects.distinct().values_list('anneeStage')
+    for p in Stagier.objects.distinct().values_list('anneeStage'):
+        anne.append(p)
 
     print(anne)
     context = {
