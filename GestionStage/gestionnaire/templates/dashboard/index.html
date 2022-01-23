@@ -96,6 +96,14 @@
                 </script>
             </div>
         </div>
+        <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Filtre par anneé
+                      </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        {%for an in anne %} <li> <a class="dropdown-item" href="#"> {{an}}</a> </li>{% endfor %}
+                    </ul>
+                </div>
     </div>
 </div>
 <style>

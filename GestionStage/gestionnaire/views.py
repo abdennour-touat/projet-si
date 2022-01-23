@@ -18,10 +18,15 @@ def index(request):
     for organ in Organisme.objects.filter(typeOrganisme="Partenaire"):
         stages_count.append(Stagier.objects.filter(idOrganisme=organ).count()) 
     organismes =Organisme.objects.filter(typeOrganisme="Partenaire") 
+    anne=[]
+    anne= Stagier.objects.distinct().values_list('anneeStage')
+
+    print(anne)
     context = {
         'organismes':organismes,
         'stages_count':stages_count,
         'organ':organ,
+        'anne':anne,
 
     }
     return render(request,"dashboard/index.html",context)
