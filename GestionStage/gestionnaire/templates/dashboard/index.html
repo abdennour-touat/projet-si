@@ -73,7 +73,7 @@
                         var myChart = new Chart(ctx, {
                             type: 'bar',
                             data: {
-                                labels: [{% for organisme in organismes %}'{{organisme.nomOrganisme}}', {% endfor %}],
+                                labels: [{% for organisme in pfe %}'{{organisme.nomOrganisme}}', {% endfor %}],
                         datasets: [{
                             label: 'Répartition des PFE / entreprise ',
                             data: [{% for count in pfe_count %}{{count}},{% endfor %}],
@@ -124,10 +124,10 @@
                         var myChart3 = new Chart(ctx, {
                             type: 'line',
                             data: {
-                                labels: [{% for organisme in organismes %}'{{organisme.nomOrganisme}}', {% endfor %}],
+                                labels: [{% for organisme in anne %}'{{organisme}}', {% endfor %}],
                         datasets: [{
                             label: 'Taux dévolution du nombre dorganismes ayant reçus des stagiaires PFE',
-                            data: [{% for stage in stages_count %}{{stage}},{% endfor %}],
+                            data: [{% for stage in evolution %}{{stage}},{% endfor %}],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 1)',
                                 'rgba(54, 162, 235, 1)',

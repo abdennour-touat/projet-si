@@ -14,24 +14,34 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='user-login')
 def index(request):
+    # Etat de classement des organismes partenaires professionnels de l'ESI sur la base du nombre de stagiaires retenus.
     stages_count=[]
     for organ in Organisme.objects.filter(typeOrganisme="Partenaire"):
         stages_count.append(Stagier.objects.filter(idOrganisme=organ).count()) 
-
-    organismes =Organisme.objects.filter(typeOrganisme="Partenaire") 
-    anne=[]
+    pfe =Organisme.objects.all() #tout les organismes
+    organismes =Organisme.objects.filter(typeOrganisme="Partenaire") #les organismes partenaires
+    #les années
+    anne = []
     for p in Stagier.objects.distinct().values_list('anneeStage'):
-        anne.append(p)
-    
-    pfe_count=[]
+        for s in p:
+            anne.append(s)
+    anne.sort()
+    #Taux d'évolution du nombre d'organismes ayant reçus des stagiaires PFE.
+    evolution=[]
+    for i in anne:
+        evolution.append(Stagier.objects.filter(anneeStage=i).count())
+    #Répartition des PFE / entreprise
+    pfe_count=[] 
     for i in Organisme.objects.all():
-        pfe_count.append(Stage.objects.filter(idOrganisme=i.id).count())
+        pfe_count.append(Stage.objects.filter(idOrganisme=i.id,typeStage=3).count()) #id de 3CS est :3
     context = {
         'organismes':organismes,
         'stages_count':stages_count,
         'organ':organ,
         'anne':anne,
         'pfe_count':pfe_count,
+        'pfe':pfe,
+        'evolution':evolution
     }
     return render(request,"dashboard/index.html",context)
 
