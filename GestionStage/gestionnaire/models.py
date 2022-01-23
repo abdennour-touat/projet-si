@@ -13,7 +13,7 @@ class Organisme(models.Model):
     def __str__(self):
         return f'{self.nomOrganisme}'
 
-class typeStage(models.Model):
+class TypeStage(models.Model):
     typeStage=models.CharField("Type du stage",max_length=30)
     duree=models.PositiveIntegerField("Duree",help_text="Semaine")
 
@@ -22,7 +22,7 @@ class typeStage(models.Model):
 
 class Stage(models.Model):
     nomStage=models.CharField("Titre du Satge",max_length=120)
-    typeStage=models.ForeignKey(typeStage, on_delete=models.CASCADE, verbose_name="type du stsge")
+    typeStage=models.ForeignKey(TypeStage, on_delete=models.CASCADE, verbose_name="type du stsge")
     idOrganisme=models.ForeignKey(Organisme, on_delete=models.CASCADE, verbose_name="Organisme")
 
     def __str__(self):

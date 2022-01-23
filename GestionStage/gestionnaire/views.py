@@ -6,7 +6,7 @@ from typing import Any
 from django.shortcuts import redirect, render
 from django.template import context
 from .forms import EncadreurForm, GroupeForm, PromoteurForm,OrganismeForm, StageForm, StagierForm
-from .models import Encadreur, Groupe, Promoteur,Organisme, Stage, Stagier,typeStage
+from .models import Encadreur, Groupe, Promoteur,Organisme, Stage, Stagier,TypeStage
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 
@@ -24,8 +24,8 @@ def index(request):
         anne.append(p)
     
     pfe_count=[]
-    for l in Organisme.objects.all():
-        pfe_count.append(Stage.objects.filter(idOrganisme=l.id).count())
+    for i in Organisme.objects.all():
+        pfe_count.append(Stage.objects.filter(idOrganisme=i.id).count())
     context = {
         'organismes':organismes,
         'stages_count':stages_count,
