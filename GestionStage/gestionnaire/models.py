@@ -1,12 +1,13 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
-TYPE = (
-    ('Partenaire', 'Partenaire'),
-    ('non Partenaire', 'non Partenaire'),
-)
+
 
 class Organisme(models.Model):
+    TYPE = (
+    ('Partenaire', 'Partenaire'),
+    ('non Partenaire', 'non Partenaire'),
+    )
     nomOrganisme=models.CharField("Organisme", max_length=120) 
     typeOrganisme=models.CharField("Type de l'organisme ",max_length=30, choices=TYPE) 
 
@@ -61,11 +62,18 @@ class Groupe(models.Model):
 
 
 class Stagier(models.Model):
+    NIV = (
+    ('1CPI', '1CPI'),
+    ('2CPI', '2CPI'),
+    ('1CS', '1CS'),
+    ('2CS', '2CS'),
+    ('3CS', '3CS'),
+    )
     matricule = models.CharField("Matricule",max_length=12,primary_key=True)
     anneeStage = models.CharField("Annee du stage",max_length=12)
     nomStagier = models.CharField("Nom",max_length=120)
     prenomStagier = models.CharField("Prenom",max_length=120)
-    niveauDetude = models.CharField("Niveau d'etude",max_length=80)
+    niveauDetude = models.CharField("Niveau d'etude",max_length=80,choices=NIV)
     idGroupe = models.ForeignKey(Groupe, on_delete=models.CASCADE, verbose_name="ID groupe")
     emailStagier = models.EmailField("email",max_length=100)
     numeroTelephoneStagier = PhoneNumberField("Numero de telephone",unique = False, null = False, blank = False)

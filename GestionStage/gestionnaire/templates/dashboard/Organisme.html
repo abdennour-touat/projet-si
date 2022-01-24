@@ -96,18 +96,15 @@
 <div class="text-center my-4">
   <div>
     <div class="text-center">
-      <form class="form mb-3 d-flex w-auto">
-        <input
-          class="form-control mr-sm-2"
-          name="q"
-          type="search"
-          placeholder="Rechercher"
-          aria-label="Rechercher"
-        />
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-          Recherche
-        </button>
+      <div class="card card-body">
+
+        <form method="get">
+            {{myFilter.form}}
+
+        <button class="btn btn-primary" type="submit">Search</button>
       </form>
+
+    </div>
       <div style="height: 550px; overflow: scroll">
         <table class="table bg-white">
           <thead class="bg-info text-white">

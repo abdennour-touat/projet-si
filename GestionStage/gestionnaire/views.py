@@ -1,17 +1,16 @@
-from ast import And
-from itertools import count, product
-from select import select
-from tkinter.tix import Select
-from typing import Any
+
 from django.shortcuts import redirect, render
-from django.template import context
+
+
+from .filters import EncadreurFilter, GroupeFilter, OrganismeFilter, PromoteurFilter, StageFilter, StagiereFilter
 from .forms import EncadreurForm, GroupeForm, PromoteurForm,OrganismeForm, StageForm, StagierForm
-from .models import Encadreur, Groupe, Promoteur,Organisme, Stage, Stagier,TypeStage
-from django.db.models import Q
+from .models import Encadreur, Groupe, Promoteur,Organisme, Stage, Stagier
 from django.contrib.auth.decorators import login_required
 
 
 
+
+#index view /main page
 @login_required(login_url='user-login')
 def index(request):
     # Etat de classement des organismes partenaires professionnels de l'ESI sur la base du nombre de stagiaires retenus.
@@ -48,19 +47,18 @@ def index(request):
 
 
 
+# ========================================================== promoteur
 
-
-
+# promoteur main page view
 @login_required(login_url='user-login')
 def promoteur(request):
-    if 'q' in request.GET:
-        q = request.GET['q']
-        multiple_q = Q(Q(nomPromoteur__icontains=q) | Q(prenomPromoteur__icontains=q))
-        items = Promoteur.objects.filter(multiple_q)
-    else:
-        items = Promoteur.objects.all()
     
-    if request.method == 'POST':
+    items = Promoteur.objects.all()
+
+    myFilter = PromoteurFilter(request.GET, queryset=items) #search function for Promoteur
+    items = myFilter.qs
+
+    if request.method == 'POST':  #table Promoteur
         form = PromoteurForm(request.POST)
         if form.is_valid():
             form.save()
@@ -70,10 +68,12 @@ def promoteur(request):
     context = {
         'items': items,
         'form' : form,
+        'myFilter' : myFilter,
     }
     return render(request, 'dashboard/promoteur.html', context)
 
 
+#promoteur delete view
 @login_required(login_url='user-login')
 def promoteurDelete(request, pk):
     item = Promoteur.objects.get(id=pk)
@@ -86,6 +86,7 @@ def promoteurDelete(request, pk):
     return render(request, 'dashboard/promoteur_delete.html',context)
 
 
+#promoteur update view
 @login_required(login_url='user-login')
 def promoteurEdit(request, pk):
     item = Promoteur.objects.get(id=pk)
@@ -107,18 +108,19 @@ def promoteurEdit(request, pk):
 
 
 
+# ===================================================== encadreur
 
-
+# Encadreur main page view
 
 @login_required(login_url='user-login')
 def encadreur(request):
-    if 'q' in request.GET:
-        q = request.GET['q']
-        multiple_q = Q(Q(nomEncadreur__icontains=q) | Q(prenomEncadreur__icontains=q))
-        items = Encadreur.objects.filter(multiple_q)
-    else:
-        items = Encadreur.objects.all()
-    if request.method == 'POST':
+    
+    items = Encadreur.objects.all()
+
+    myFilter = EncadreurFilter(request.GET, queryset=items)  #search function for Encadreur
+    items = myFilter.qs
+
+    if request.method == 'POST':   #table Encadreur
         form = EncadreurForm(request.POST)
         if form.is_valid():
             form.save()
@@ -128,9 +130,12 @@ def encadreur(request):
     context = {
         'items': items,
         'form' : form,
+        'myFilter' : myFilter,
     }
     return render(request, 'dashboard/encadreur.html', context)
 
+
+# Encadreur delete view
 @login_required(login_url='user-login')
 def encadreurDelete(request, pk):
     item = Encadreur.objects.get(id=pk)
@@ -143,6 +148,7 @@ def encadreurDelete(request, pk):
     return render(request, 'dashboard/encadreur_delete.html', context)
 
 
+# Encadreur update view
 def encadreurEdit(request, pk):
     item = Encadreur.objects.get(id=pk)
     if request.method == 'POST':
@@ -163,15 +169,19 @@ def encadreurEdit(request, pk):
 
 
 
+# ====================================================== organisme
+
+# organisme main page view
 
 @login_required(login_url='user-login')
 def organisme(request):
-    if 'q' in request.GET:
-        q = request.GET['q']
-        items = Organisme.objects.filter(nomOrganisme__icontains=q)
-    else:
-        items = Organisme.objects.all()
-    if request.method == 'POST':
+
+    items = Organisme.objects.all()
+
+    myFilter = OrganismeFilter(request.GET, queryset=items) #search function for Organisme
+    items = myFilter.qs
+
+    if request.method == 'POST':    #table Organisme
         form = OrganismeForm(request.POST)
         if form.is_valid():
             form.save()
@@ -181,9 +191,13 @@ def organisme(request):
     context = {
         'items': items,
         'form' : form,
+        'myFilter' : myFilter,
     }
     return render(request, 'dashboard/Organisme.html', context)
 
+
+
+# organisme delete view
 
 @login_required(login_url='user-login')
 def OrganismeDelete(request, pk):
@@ -196,6 +210,8 @@ def OrganismeDelete(request, pk):
     }
     return render(request, 'dashboard/Organisme_delete.html',context)
 
+
+# organisme update view
 
 @login_required(login_url='user-login')
 def OrganismeEdit(request, pk):
@@ -218,19 +234,18 @@ def OrganismeEdit(request, pk):
 
 
 
+# ================================================ groupe
 
-
-
-#abdenour's code.....
+# groupe main page view
 @login_required(login_url='user-login')
 def getGroup(request):
-    if 'q' in request.GET:
-        q = request.GET['q']
-        multiple_q = Q(Q(numEncadreur__icontains=q) | Q(idPromoteur__icontains=q) | Q(numStage__icontains=q))
-        items = Groupe.objects.filter(multiple_q)
-    else:
-        items = Groupe.objects.all()
-    if request.method == 'POST':
+    
+    items = Groupe.objects.all()
+
+    myFilter = GroupeFilter(request.GET, queryset=items) #search function for Groupe
+    items = myFilter.qs
+
+    if request.method == 'POST':    #table groupe
         form = GroupeForm(request.POST)
         if form.is_valid():
             form.save()
@@ -240,9 +255,12 @@ def getGroup(request):
     context = {
         'items': items,
         'form': form,
+        'myFilter': myFilter,
     }
     return render(request, 'dashboard/Group.html', context)
 
+
+#groupe deelete view
 
 @login_required(login_url='user-login')
 def GroupDelete(request, pk):
@@ -255,6 +273,8 @@ def GroupDelete(request, pk):
     }
     return render(request, 'dashboard/Group_delete.html', context)
 
+
+#groupe edit view
 
 @login_required(login_url='user-login')
 def GroupEdit(request, pk):
@@ -275,18 +295,17 @@ def GroupEdit(request, pk):
 
 
 
+#============================================== stagiere
 
-
+#stagiere main page
 
 @login_required(login_url='user-login')
 def getStagier(request):
-    if 'q' in request.GET:
-        q = request.GET['q']
-        multiple_q = Q(Q(nomStagier__icontains=q) | Q(prenomStagier__icontains=q) | Q(matricule__icontains=q))
-        items = Stagier.objects.filter(multiple_q)
-    else:
-        items = Stagier.objects.all()
-    if request.method == 'POST':
+    items = Stagier.objects.all()
+    myFilter = StagiereFilter(request.GET, queryset=items) #search function for Stagiere
+    items = myFilter.qs
+
+    if request.method == 'POST':    #table groupe
         form = StagierForm(request.POST)
         if form.is_valid():
             form.save()
@@ -296,9 +315,12 @@ def getStagier(request):
     context = {
         'items': items,
         'form': form,
+        'myFilter' : myFilter,
     }
     return render(request, 'dashboard/Stagier.html', context)
 
+
+#stagiere delete view
 
 @login_required(login_url='user-login')
 def StagierDelete(request, pk):
@@ -311,6 +333,8 @@ def StagierDelete(request, pk):
     }
     return render(request, 'dashboard/Stagier_delete.html', context)
 
+
+# satagiere edit view
 
 @login_required(login_url='user-login')
 def StagierEdit(request, pk):
@@ -332,16 +356,20 @@ def StagierEdit(request, pk):
 
 
 
+#============================================== stage
+
+#stage main page
+
+
+
 @login_required(login_url='user-login')
 def stage(request):
-    # if 'q' in request.GET:
-    #     q = request.GET['q']
-    #     items = Stage.objects.filter(nomStage__icontains=q)
-    # else:
-    #     items = Stage.objects.all()
-    
+
     items = Stage.objects.all()
-    if request.method == 'POST':
+    myFilter = StageFilter(request.GET, queryset=items) #search function for stage
+    items = myFilter.qs
+
+    if request.method == 'POST':    #table stage
         form = StageForm(request.POST)
         if form.is_valid():
             form.save()
@@ -351,9 +379,12 @@ def stage(request):
     context = {
         'items': items,
         'form': form,
+        'myFilter' : myFilter,
     }
     return render(request, 'dashboard/Stage.html', context)
 
+
+#stagiere delete view
 
 @login_required(login_url='user-login')
 def StageDelete(request, pk):
@@ -367,7 +398,7 @@ def StageDelete(request, pk):
     return render(request, 'dashboard/Stage_delete.html', context)
 
 
-
+#stagiere edit view
 
 @login_required(login_url='user-login')
 def StageEdit(request, pk):
