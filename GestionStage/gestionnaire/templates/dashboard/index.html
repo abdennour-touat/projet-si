@@ -13,7 +13,7 @@
             Filtre par anneé
           </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            {%for an in anne %} <li> <a class="dropdown-item" href="#"> {{an}}</a> </li>{% endfor %}
+            {%for an in anne %} <li> <a class="dropdown-item" href="{%url 'dashboard-filtre' an %}"> {{an}}</a> </li>{% endfor %}
         </ul>
     <div class="row ">
         <div class="col-md-6 my-4">

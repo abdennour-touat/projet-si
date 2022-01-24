@@ -21,7 +21,7 @@ class StagiereFilter(django_filters.FilterSet):
 
 	class Meta:
 		model = Stagier
-		fields = ['matricule','nomStagier','prenomStagier','niveauDetude','anneeStage','idOrganisme']
+		fields = ['matricule','nomStagier','prenomStagier','niveauDetude','anneeStage']
 
 
 class OrganismeFilter(django_filters.FilterSet):
@@ -39,7 +39,7 @@ class PromoteurFilter(django_filters.FilterSet):
 
 	class Meta:
 		model = Promoteur
-		fields = ['nomPromoteur', 'prenomPromoteur']
+		fields = ['nomPromoteur', 'prenomPromoteur','idOrganisme']
 
 
 class EncadreurFilter(django_filters.FilterSet):
@@ -47,7 +47,7 @@ class EncadreurFilter(django_filters.FilterSet):
 
 	class Meta:
 		model = Encadreur
-		fields = ['nomEncadreur','prenomEncadreur','idOrganisme']
+		fields = ['nomEncadreur','prenomEncadreur']
 
 
 class GroupeFilter(django_filters.FilterSet):

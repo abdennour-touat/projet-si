@@ -21,28 +21,28 @@ class TypeStage(models.Model):
     def __str__(self):
         return f'{self.typeStage}'
 
-class Stage(models.Model):
-    nomStage=models.CharField("Titre du Satge",max_length=120)
-    typeStage=models.ForeignKey(TypeStage, on_delete=models.CASCADE, verbose_name="type du stsge")
-    idOrganisme=models.ForeignKey(Organisme, on_delete=models.CASCADE, verbose_name="Organisme")
-
-    def __str__(self):
-        return f'{self.nomStage}'
-
 class Promoteur(models.Model):
     nomPromoteur = models.CharField("Nom",max_length=120)
     prenomPromoteur = models.CharField("Prenom",max_length=120)
     emailPromoteur = models.EmailField("email",max_length=120)
     numeroTelephonePromoteur = PhoneNumberField("Numero de telephone",unique = False, null = False, blank = False)
+    idOrganisme = models.ForeignKey(Organisme, on_delete=models.CASCADE, verbose_name="Organisme")
+
 
     def __str__(self):
         return f'{self.nomPromoteur}-{self.prenomPromoteur}'
 
+class Stage(models.Model):
+    nomStage=models.CharField("Titre du Satge",max_length=120)
+    typeStage=models.ForeignKey(TypeStage, on_delete=models.CASCADE, verbose_name="type du stsge")
+    idPromoteur=models.ForeignKey(Promoteur, on_delete=models.CASCADE, verbose_name="Promoteur")
+
+    def __str__(self):
+        return f'{self.nomStage}'
 
 class Encadreur(models.Model):
     nomEncadreur = models.CharField("Nom",max_length=120)
     prenomEncadreur = models.CharField("Prenom",max_length=120)
-    idOrganisme = models.ForeignKey(Organisme, on_delete=models.CASCADE, verbose_name="Organisme")
     emailEncadreur = models.EmailField("email",max_length=120)
     numeroTelephoneEncadreur = PhoneNumberField("Numero de telephone",unique = False, null = False, blank = False)
 
@@ -52,8 +52,7 @@ class Encadreur(models.Model):
 
 class Groupe(models.Model):
     numStage = models.ForeignKey(Stage, on_delete=models.CASCADE, verbose_name="titre stage")
-    idPromoteur = models.ForeignKey(Promoteur, on_delete=models.CASCADE, verbose_name="Nom du promoteur")
-    numEncadreur = models.ForeignKey(Encadreur, on_delete=models.CASCADE, verbose_name="Nom de l'encadreur")
+    idEncadreur = models.ForeignKey(Encadreur, on_delete=models.CASCADE, verbose_name="Nom de l'encadreur")
 
 
     def __str__(self):
@@ -76,9 +75,7 @@ class Stagier(models.Model):
     niveauDetude = models.CharField("Niveau d'etude",max_length=80,choices=NIV)
     idGroupe = models.ForeignKey(Groupe, on_delete=models.CASCADE, verbose_name="ID groupe")
     emailStagier = models.EmailField("email",max_length=100)
-    numeroTelephoneStagier = PhoneNumberField("Numero de telephone",unique = False, null = False, blank = False)
-    idOrganisme=models.ForeignKey(Organisme, on_delete=models.CASCADE, verbose_name="Organisme")
-    
+    numeroTelephoneStagier = PhoneNumberField("Numero de telephone",unique = False, null = False, blank = False)    
     def __str__(self):
         return f'{self.nomStagier}-{self.prenomStagier}'
 

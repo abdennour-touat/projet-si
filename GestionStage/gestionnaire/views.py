@@ -16,9 +16,13 @@ def index(request):
     # Etat de classement des organismes partenaires professionnels de l'ESI sur la base du nombre de stagiaires retenus.
     stages_count=[]
     for organ in Organisme.objects.filter(typeOrganisme="Partenaire"):
-        stages_count.append(Stagier.objects.filter(idOrganisme=organ).count()) 
+        for p in Promoteur.objects.filter(idOrganisme=organ.id):
+            for m in Stage.objects.filter(idPromoteur=p.id):
+                for i in Groupe.objects.filter(numStage=m.id):
+                    stages_count.append(Stagier.objects.filter(idGroupe=i.id).count())
     pfe =Organisme.objects.all() #tout les organismes
     organismes =Organisme.objects.filter(typeOrganisme="Partenaire") #les organismes partenaires
+    #----------------------------------------------------------------------------
     #les années
     anne = []
     for p in Stagier.objects.distinct().values_list('anneeStage'):
@@ -27,12 +31,16 @@ def index(request):
     anne.sort()
     #Taux d'évolution du nombre d'organismes ayant reçus des stagiaires PFE.
     evolution=[]
-    for i in anne:
-        evolution.append(Stagier.objects.filter(anneeStage=i).count())
+    for organ in Organisme.objects.all():
+        for p in Promoteur.objects.filter(idOrganisme=organ.id):
+            for m in Stage.objects.filter(idPromoteur=p.id,typeStage=3):
+                for i in Groupe.objects.filter(numStage=m.id):
+                    evolution.append(Stagier.objects.filter(idGroupe=i.id).count())
     #Répartition des PFE / entreprise
     pfe_count=[] 
     for i in Organisme.objects.all():
-        pfe_count.append(Stage.objects.filter(idOrganisme=i.id,typeStage=3).count()) #id de 3CS est :3
+        for p in Promoteur.objects.filter(idOrganisme=i.id):
+            pfe_count.append(Stage.objects.filter(idPromoteur=p.id,typeStage=3).count()) #id de 3CS est :3 
     context = {
         'organismes':organismes,
         'stages_count':stages_count,
@@ -40,10 +48,47 @@ def index(request):
         'anne':anne,
         'pfe_count':pfe_count,
         'pfe':pfe,
-        'evolution':evolution
+        'evolution':evolution,
     }
     return render(request,"dashboard/index.html",context)
 
+
+def anneefiltre(request,pk):
+     # Etat de classement des organismes partenaires professionnels de l'ESI sur la base du nombre de stagiaires retenus.
+    stages_count=[]
+    for organ in Organisme.objects.filter(typeOrganisme="Partenaire"):
+        for p in Promoteur.objects.filter(idOrganisme=organ.id):
+            for m in Stage.objects.filter(idPromoteur=p.id):
+                for i in Groupe.objects.filter(numStage=m.id):
+                    stages_count.append(Stagier.objects.filter(idGroupe=i.id,anneeStage=pk).count())
+    pfe =Organisme.objects.all() #tout les organismes
+    organismes =Organisme.objects.filter(typeOrganisme="Partenaire") #les organismes partenaires
+    #----------------------------------------------------------------------------
+    #les années
+    anne = []
+    for p in Stagier.objects.distinct().values_list('anneeStage'):
+        for s in p:
+            anne.append(s)
+    anne.sort()
+    #------------------------------------------------------------
+    #Répartition des PFE / entreprise
+    pfe_count=[] 
+    for l in Organisme.objects.all():
+        for p in Promoteur.objects.filter(idOrganisme=l.id):
+            for m in Stage.objects.filter(idPromoteur=p.id):
+                for i in Groupe.objects.filter(numStage=m.id):
+                    for s in Stagier.objects.filter(idGroupe=i.id,anneeStage=pk):
+                            pfe_count.append(Stage.objects.filter(idPromoteur=p.id,typeStage=3).count()) #id de 3CS est :3 
+
+    context = {
+        'organismes':organismes,
+        'stages_count':stages_count,
+        'organ':organ,
+        'anne':anne,
+        'pfe_count':pfe_count,
+        'pfe':pfe,
+    }
+    return render(request,"dashboard/index.html",context)
 
 
 
