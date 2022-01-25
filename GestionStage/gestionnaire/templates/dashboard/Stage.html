@@ -103,8 +103,8 @@
         <button class="button" type="submit">Search</button>
       </form>
     </div>
-    <div style="height: 550px; overflow: scroll">
-      <table class="table bg-white mb-0 ">
+    <div style="height: 550px; overflow: scroll; background: transparent;">
+      <table class="table  mb-0 "style="border-radius: 50px;">
         <thead class="bg-info text-white table-head" style="position: sticky; top: 0">
           <tr>
             <th scope="col">Nom Stage</th>
@@ -121,14 +121,14 @@
             <td>{{ item.idPromoteur }}</td>
             <td>
               <a
-                class="btn btn-info btn-sm mr-2 ModalEdit"
+                class="btn  btn-sm mr-2 ModalEdit"
                 data-popup-url="{% url 'dashboard-Stage-edit' item.id %}"
                 data-toggle="modal"
                 data-target="#editModal"
                 >Edit</a
               >
               <a
-                class="btn btn-danger btn-sm ml-2 ModalDelete"
+                class="btn  btn-sm ml-2 ModalDelete"
                 data-popup-url="{% url 'dashboard-Stage-delete' item.id %}"
                 data-toggle="modal"
                 data-target="#deleteModal"
@@ -143,7 +143,7 @@
   </div>
   <button
     type="button"
-    class="btn btn-primary text-center mt-3"
+    class="btn  text-center mt-3 Ajouter"
     data-toggle="modal"
     style="font-size: 20px"
     data-target="#addModal"
@@ -241,6 +241,9 @@
   transition: background-color 200ms ease-in 0s, border-color 200ms ease-in 0s, box-shadow 200ms ease-in 0s, color 200ms ease-in 0s;
   background: #88C0D0;
 }
+table{
+  border-radius: 50px!important; 
+}
 .table-head{
   background: #5E81AC!important;
   color: #ECEFF4!important;
@@ -248,7 +251,44 @@
     font-size: 1rem;
     margin-top: 0;
     margin-bottom: 60px;
+    border-radius: 50px;
 
+}
+tr{
+  border-radius: 50px;
+background: #5E81AC!important; 
+}
+tbody{
+  background: rgb(41, 46, 57);
+  border-top: none;
+  color:#ECEFF4!important; 
+}
+table td{
+  border-top: 0px!important;
+}
+table th{
+  border-top: 0px!important;
+
+}
+.table thead th{
+  border-bottom: 0px;
+
+}
+.ModalEdit{
+  color: #ECEFF4!important;
+  background: #8FBCBB;
+  font-size: 17px;
+}
+.ModalDelete{
+  color: #ECEFF4!important;
+  background: #BF616A
+;
+font-size: 17px;
+}
+.Ajouter{
+  color: #ECEFF4!important;
+  background: #5E81AC;
+  
 }
   
 </style>
