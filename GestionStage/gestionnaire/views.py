@@ -1,4 +1,5 @@
 
+from email.headerregistry import Group
 from django.shortcuts import redirect, render
 
 
@@ -73,19 +74,23 @@ def anneefiltre(request,pk):
     #------------------------------------------------------------
     #Répartition des PFE / entreprise
     pfe_count=[] 
-    for l in Organisme.objects.all():
-        for p in Promoteur.objects.filter(idOrganisme=l.id):
-            for m in Stage.objects.filter(idPromoteur=p.id):
-                for i in Groupe.objects.filter(numStage=m.id):
-                    for s in Stagier.objects.filter(idGroupe=i.id,anneeStage=pk):
-                            pfe_count.append(Stage.objects.filter(idPromoteur=p.id,typeStage=3).count()) #id de 3CS est :3 
+    # for l in Organisme.objects.all():
+    #     for p in Promoteur.objects.filter(idOrganisme=l.id):
+    #         for m in Stage.objects.filter(idPromoteur=p.id):
+    #             for i in Groupe.objects.filter(numStage=m.id):
+    #                 for s in Stagier.objects.filter(idGroupe=i.id,anneeStage=pk):
+    #                         pfe_count.append(Stage.objects.filter(idPromoteur=p.id,typeStage=3).count()) #id de 3CS est :3 
+    stages = []
+    for st in Stagier.objects.filter(anneeStage= pk).values('idGroupe'):
+        for gr in Groupe.objects.filter(id= st['idGroupe']).values('numStage'):
+            stages.append( Stage.objects.filter(id = gr['numStage']).values())
 
     context = {
         'organismes':organismes,
         'stages_count':stages_count,
         'organ':organ,
         'anne':anne,
-        'pfe_count':pfe_count,
+        'pfe_count':stages,
         'pfe':pfe,
     }
     return render(request,"dashboard/index.html",context)

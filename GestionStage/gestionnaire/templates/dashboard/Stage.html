@@ -65,9 +65,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" id="editbody">
-        
-      </div>
+      <div class="modal-body" id="editbody"></div>
     </div>
   </div>
 </div>
@@ -92,28 +90,22 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        {% csrf_token %} 
-      </div>
+      <div class="modal-body">{% csrf_token %}</div>
     </div>
   </div>
 </div>
 <div class="text-center my-4">
   <div>
-    <div class="text-center">
-      <div class="card card-body">
+    <div class="text-center mb-4">
+      <form method="get" class="form">
+        {{myFilter.form}}
 
-        <form method="get">
-            {{myFilter.form}}
-
-        <button class="btn btn-primary" type="submit">Search</button>
+        <button class="button" type="submit">Search</button>
       </form>
-
-    </div>
     </div>
     <div style="height: 550px; overflow: scroll">
-      <table class="table bg-white mb-0">
-        <thead class="bg-info text-white" style="position: sticky; top: 0">
+      <table class="table bg-white mb-0 ">
+        <thead class="bg-info text-white table-head" style="position: sticky; top: 0">
           <tr>
             <th scope="col">Nom Stage</th>
             <th scope="col">Type Stage</th>
@@ -131,10 +123,8 @@
               <a
                 class="btn btn-info btn-sm mr-2 ModalEdit"
                 data-popup-url="{% url 'dashboard-Stage-edit' item.id %}"
-               
                 data-toggle="modal"
                 data-target="#editModal"
-                
                 >Edit</a
               >
               <a
@@ -161,27 +151,125 @@
     Ajouter Stage
   </button>
 </div>
-<script>
+<style>
+  .stage {
+    background-color: #88c0d0;
+  }
+  .form {
+    background: transparent;
+    height: 60px !important;
+    padding: 0.5em;
+    height: 320px;
+
+    border-bottom: 1px solid #D8DEE9
+;
    
-    $(".ModalEdit").on("click",function (e) {
-      
-      var $popup = $("#deleteModal");
-      var popup_url = $(this).data("popup-url");
-      $(".modal-body", $popup).load(popup_url, function () {
-        $popup.modal("show");
-      });
-    } )
-    $(".ModalDelete").on("click", function (e) {
-      e.preventDefault();
-      var $popup = $("#deleteModal");
-      var popup_url = $(this).data("popup-url");
-      
-      $(".modal-body", $popup).load(popup_url, function () {
-        
-        $popup.modal("show");
-        $("#editbody").html(popup_url)
-      });
-    }); 
+    transition: all 0.2s ease-in-out;
+    opacity: 95%;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-evenly;
+  }
+  .form label {
+    font-weight: 400;
+    color: #ECEFF4;
+   
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 60px;
+    
+   
+  }
+  .form option {
+    font-weight: 500;
+    color: #2e3440;
+    opacity: 0.7;
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 60px;
+    text-shadow: 2px 2px 4px white;
+  }
+  .form input {
+    outline-style: none;
+    border: 1px solid transparent;
+    color: rgb(236, 239, 244);
+    border-radius: 4px;
+    /* padding: 0.5em 1em 0.5em 2em; */
+    background-color: rgb(46, 52, 64);
+    font: inherit;
+    font-size: 1.125rem;
+    padding: 4px;
+    box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
+    transition: border-color 100ms ease-in-out 0s, color 400ms ease-in-out 0s, background-color 400ms ease-in-out 0s;
+    /* text-align: center; */
+  }
+  .form select {
+   
+
+    outline-style: none;
+    border: 1px solid transparent;
+    color: rgb(236, 239, 244);
+    border-radius: 4px;
  
-  </script>
+    background-color: rgb(46, 52, 64);
+    font: inherit;
+    font-size: 1.125rem;
+    padding: 4px 50px ;
+    box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
+    transition: border-color 100ms ease-in-out 0s, color 400ms ease-in-out 0s, background-color 400ms ease-in-out 0s;
+    text-align: center;
+
+  }
+  .button{
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: inherit;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    border: none;
+    border-radius: 0.25em;
+    background: none rgb(136, 192, 208);
+    padding: 0.45em 1em;
+    user-select: none;
+    line-height: 1.15;
+    color: rgb(59, 66, 82);
+}
+.button:hover{
+  transition: background-color 200ms ease-in 0s, border-color 200ms ease-in 0s, box-shadow 200ms ease-in 0s, color 200ms ease-in 0s;
+  background: #88C0D0;
+}
+.table-head{
+  background: #5E81AC!important;
+  color: #ECEFF4!important;
+  font-weight: 400;
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 60px;
+
+}
+  
+</style>
+<script>
+  $(".ModalEdit").on("click", function (e) {
+    e.preventDefault();
+    var $popup = $("#editModal");
+    var popup_url = $(this).data("popup-url");
+    $(".modal-body", $popup).load(popup_url, function () {
+      $popup.modal("show");
+    });
+  });
+
+  $(".ModalDelete").on("click", function (e) {
+    e.preventDefault();
+    var $popup = $("#deleteModal");
+    var popup_url = $(this).data("popup-url");
+
+    $(".modal-body", $popup).load(popup_url, function () {
+      $popup.modal("show");
+    });
+  });
+</script>
 {% endblock %}
