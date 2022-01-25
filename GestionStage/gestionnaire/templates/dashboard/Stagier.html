@@ -168,9 +168,14 @@
     Ajouter Stage
   </button>
 </div>
+<style>
+  .stagier{
+    background-color: #88C0D0;
+  }
+</style>
 <script>
   $(".ModalEdit").on("click", function (e) {
-    var $popup = $("#deleteModal");
+    var $popup = $("#editModal");
     var popup_url = $(this).data("popup-url");
     $(".modal-body", $popup).load(popup_url, function () {
       $popup.modal("show");

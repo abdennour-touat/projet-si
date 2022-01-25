@@ -1,17 +1,17 @@
 import django_filters
 from django_filters import DateFilter, CharFilter
 from .models import Encadreur, Groupe, Promoteur, Stage, Organisme, Stagier
-
+from django import forms #for adding class to the filter forms so i can style it
+from django.forms.widgets import TextInput
 
 
 #stage filter
 class StageFilter(django_filters.FilterSet):
-	nomStage = CharFilter(field_name='nomStage', lookup_expr='icontains')
-    
+	nomStage = CharFilter(field_name='nomStage', lookup_expr='icontains',widget=TextInput(attrs={'placeholder': '  .......'}))
 	class Meta:
 		model = Stage
 		fields = ['nomStage','typeStage'] # the attributs we are filtering
-
+		
 
 
 #Stagiere filter

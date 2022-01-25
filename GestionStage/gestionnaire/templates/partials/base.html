@@ -24,23 +24,22 @@
   </head>
   <style>
     body{
-      background-color: #2E3440;
-
+      /* background-color: #2E3440; */
+      /* background: linear-gradient(45deg, rgb(41, 46, 57), rgb(46, 52, 64)); */
+      background: rgb(41, 46, 57);
       
     }
   </style>
   <body>
     {% include 'partials/navbar.html' %}
-    <div class="container">
-      <h1 style="text-align: center; font-family: Helvetica Neue, sans-serif; line-height: 1.5; color: wheat;">Gestion des statistiques </h1>
-    </div>
+  
    
-   
-          
-        {% block content %}
+    <div class="w-75 mx-auto">
 
-        {% endblock %}
-   
+      {% block content %}
+
+      {% endblock %}
+  </div>
 
 
     <!-- Optional JavaScript; choose one of the two! -->

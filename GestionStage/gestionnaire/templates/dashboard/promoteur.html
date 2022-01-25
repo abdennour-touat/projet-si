@@ -147,6 +147,11 @@
       </table>
     </div>
   </div>
+  <style>
+    .promoteur{
+      background-color: #88C0D0;
+    }
+  </style>
   <button
     type="button"
     class="btn btn-primary text-center mt-3"
@@ -159,7 +164,7 @@
 </div>
 <script>
   $(".ModalEdit").on("click", function (e) {
-    var $popup = $("#deleteModal");
+    var $popup = $("#editModal");
     var popup_url = $(this).data("popup-url");
     $(".modal-body", $popup).load(popup_url, function () {
       $popup.modal("show");
