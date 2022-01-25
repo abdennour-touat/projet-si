@@ -17,7 +17,7 @@
         </ul>
     <div class="row ">
         <div class="col-md-6 my-4">
-            <div class="bg-white border border-primary">
+            <div class="bg-white border border-primary">   
                 <div class="card-body">
                     <canvas id="myChart1" width="400" height="300"></canvas>
                     <script>
@@ -65,7 +65,7 @@
             
         </div>
         <div class="col-md-6 my-4 ">
-            {{pfe_count}}
+
             <div class="bg-white border border-primary">
                 <div class="card-body">
                     <canvas id="myChart" width="400" height="300"></canvas>
@@ -74,7 +74,7 @@
                         var myChart = new Chart(ctx, {
                             type: 'bar',
                             data: {
-                                labels: [{% for organisme in pfe %}'{{organisme.nomOrganisme}}', {% endfor %}],
+                                labels: [{% for organisme in list_organismes %}'{{organisme.nomOrganisme}}', {% endfor %}],
                         datasets: [{
                             label: 'Répartition des PFE / entreprise ',
                             data: [{% for count in pfe_count %}{{count}},{% endfor %}],

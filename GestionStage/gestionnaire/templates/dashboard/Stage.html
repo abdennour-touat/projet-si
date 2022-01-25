@@ -11,7 +11,7 @@
 >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <!-- <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
         <button
           type="button"
@@ -21,7 +21,7 @@
         >
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
+      </div> -->
       <div class="modal-body">
         <div class="">
           <div class="card card-body">
@@ -103,16 +103,18 @@
         <button class="button" type="submit">Search</button>
       </form>
     </div>
-    <div style="height: 550px; overflow: scroll; background: transparent;">
+    <div style="height: 550px; overflow: scroll; background:#ECEFF4 ; border-radius: 50px;opacity: 86%!important;">
       <table class="table  mb-0 "style="border-radius: 50px;">
-        <thead class="bg-info text-white table-head" style="position: sticky; top: 0">
-          <tr>
-            <th scope="col">Nom Stage</th>
-            <th scope="col">Type Stage</th>
-            <th scope="col">id Promoteur</th>
-            <th scope="col">option</th>
-          </tr>
-        </thead>
+        <thead class="table-head" style="position: sticky; top: 0">
+            <tr>
+              <th scope="col">Nom Stage</th>
+              <th scope="col">Type Stage</th>
+              <th scope="col">id Promoteur</th>
+              <th scope="col">option</th>
+            </tr>
+          </thead>
+
+
         <tbody>
           {% for item in items %}
           <tr>
@@ -157,6 +159,7 @@
   }
   .form {
     background: transparent;
+
     height: 60px !important;
     padding: 0.5em;
     height: 320px;
@@ -171,18 +174,15 @@
     justify-content: space-evenly;
   }
   .form label {
-    font-weight: 400;
-    color: #ECEFF4;
-   
-    font-size: 1rem;
+    font-weight: 500;
+    color: rgb(76, 86, 106);
+    font-size: 1.3rem;
     margin-top: 0;
     margin-bottom: 60px;
-    
-   
   }
   .form option {
     font-weight: 500;
-    color: #2e3440;
+    color: #ECEFF4;
     opacity: 0.7;
     font-size: 1rem;
     margin-top: 0;
@@ -195,7 +195,8 @@
     color: rgb(236, 239, 244);
     border-radius: 4px;
     /* padding: 0.5em 1em 0.5em 2em; */
-    background-color: rgb(46, 52, 64);
+    /* background-color: rgb(46, 52, 64); */
+    background: #81A1C1;
     font: inherit;
     font-size: 1.125rem;
     padding: 4px;
@@ -211,7 +212,8 @@
     color: rgb(236, 239, 244);
     border-radius: 4px;
  
-    background-color: rgb(46, 52, 64);
+    /* background-color: rgb(46, 52, 64); */
+    background: #81A1C1;
     font: inherit;
     font-size: 1.125rem;
     padding: 4px 50px ;
@@ -243,31 +245,22 @@
 }
 table{
   border-radius: 50px!important; 
+  background: transparent!important;
 }
-.table-head{
+/* .table-head{
   background: #5E81AC!important;
   color: #ECEFF4!important;
   font-weight: 400;
     font-size: 1rem;
-    margin-top: 0;
-    margin-bottom: 60px;
     border-radius: 50px;
 
-}
-thead tr th{
-  border-radius: 50px;
-  background: #5E81AC!important; 
-}
-thead{
-  background: #5E81AC!important;  
-}
-thead tr{
-  background: #5E81AC!important; 
-}
+} */
+
 tbody{
   background: rgb(41, 46, 57);
   border-top: none;
   color:#ECEFF4!important; 
+  
 }
 table td{
   border-top: 0px!important;
@@ -278,7 +271,14 @@ table th{
 }
 .table thead th{
   border-bottom: 0px;
+  /* border-radius: 50px; */
+  color: #ECEFF4!important;
+  background: #5E81AC 
 
+}
+.head{
+  border-radius: 50px;
+  background: #BF616A 
 }
 .ModalEdit{
   color: #ECEFF4!important;
