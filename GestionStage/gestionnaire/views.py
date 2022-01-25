@@ -1,9 +1,4 @@
-
-from datetime import datetime
-
 from django.shortcuts import redirect, render
-
-
 from .filters import EncadreurFilter, GroupeFilter, OrganismeFilter, PromoteurFilter, StageFilter, StagiereFilter
 from .forms import EncadreurForm, GroupeForm, PromoteurForm,OrganismeForm, StageForm, StagierForm
 from .models import Encadreur, Groupe, Promoteur,Organisme, Stage, Stagier
@@ -14,7 +9,6 @@ from django.contrib.auth.decorators import login_required
 #index view /main page
 @login_required(login_url='user-login')
 def index(request):
-    #inclh ymchi
     # Etat de classement des organismes partenaires professionnels de l'ESI sur la base du nombre de stagiaires retenus.
     stages_count=[]
     organismes=[]
@@ -23,31 +17,46 @@ def index(request):
         for p in Promoteur.objects.filter(idOrganisme=organ.id):
             for m in Stage.objects.filter(idPromoteur=p.id):
                 for i in Groupe.objects.filter(numStage=m.id):
-                    if organ in organismes:   #verifier siorganisme est deja dans la list organimses
+                    if organ in organismes:   #verifier si organisme est deja dans la list organimses
                         stages_count[organismes.index(organ)] = stages_count[organismes.index(organ)] + Stagier.objects.filter(idGroupe=i.id).count()
                     else:
                         stages_count.append(Stagier.objects.filter(idGroupe=i.id).count())
                         organismes.append(organ)
     
-    pfe =Organisme.objects.all() #tout les organismes
-    
 
     #----------------------------------------------------------------------------
-    #les années
-    anne = []
+
+    #Taux d'évolution du nombre d'organismes ayant reçus des stagiaires PFE.
+
+    
+    anne = []  #les années
+
     for p in Stagier.objects.distinct().values_list('anneeStage'):
         for s in p:
             anne.append(s)
     anne.sort()
-    #Taux d'évolution du nombre d'organismes ayant reçus des stagiaires PFE.
-    evolution=[]
-    for organ in Organisme.objects.all():
-        for p in Promoteur.objects.filter(idOrganisme=organ.id):
-            for m in Stage.objects.filter(idPromoteur=p.id,typeStage=3):
-                for i in Groupe.objects.filter(numStage=m.id):
-                    evolution.append(Stagier.objects.filter(idGroupe=i.id).count())
-    #Répartition des PFE / entreprise
     
+
+
+    cp = 0
+    evolution=[]
+    for annee in anne:
+        for organ in Organisme.objects.all():
+            for p in Promoteur.objects.filter(idOrganisme=organ.id):
+                for m in Stage.objects.filter(idPromoteur=p.id,typeStage=3):
+                    for q in Groupe.objects.filter(numStage=m.id):  
+                        if str(q.dateDebutStage.year) == annee:
+                            cp = cp + 1    
+        
+        evolution.append(cp)
+        cp = 0
+
+
+    #----------------------------------------------------------------------------
+
+    #Répartition des PFE / entreprise
+
+
     pfe_count=[] 
     list_organismes = []
     for i in Organisme.objects.all():
@@ -55,22 +64,19 @@ def index(request):
             if i in list_organismes:
                 pfe_count[list_organismes.index(i)] =pfe_count[organismes.index(i)] + Stage.objects.filter(idPromoteur=p.id,typeStage=3).count() 
             else:
-                pfe_count.append(Stage.objects.filter(idPromoteur=p.id,typeStage=3).count()  )
+                pfe_count.append(Stage.objects.filter(idPromoteur=p.id,typeStage=3).count() )
                 list_organismes.append(i)
-                # count =Stage.objects.filter(idPromoteur=p.id,typeStage=3).count() 
-                # nomOrgan = i.nomOrganisme
-                # pfe_count.append({'count':count, 'nomOrganisme':nomOrgan})
-            # pfe_count.append(Stage.objects.filter(idPromoteur=p.id,typeStage=3).count()) #id de 3CS est :3 
+
+
     context = {
         'organismes':organismes,
         'stages_count':stages_count,
-
         'anne':anne,
         'pfe_count':pfe_count,
         'list_organismes' : list_organismes,
         'evolution':evolution
-        
     }
+    
     return render(request,"dashboard/index.html",context)
 
 
@@ -78,6 +84,8 @@ def index(request):
 
 def anneefiltre(request,pk):
      # Etat de classement des organismes partenaires professionnels de l'ESI sur la base du nombre de stagiaires retenus.
+    
+    
     stages_count=[]
     organismes=[]
 
@@ -85,23 +93,44 @@ def anneefiltre(request,pk):
         for p in Promoteur.objects.filter(idOrganisme=organ.id):
             for m in Stage.objects.filter(idPromoteur=p.id):
                 for i in Groupe.objects.filter(numStage=m.id):
-                    if organ in organismes:   #verifier siorganisme est deja dans la list organimses
+                    if organ in organismes:   #verifier si organisme est deja dans la list organimses
                         stages_count[organismes.index(organ)] = stages_count[organismes.index(organ)] + Stagier.objects.filter(idGroupe=i.id, anneeStage=pk).count()
                     else:
                         stages_count.append(Stagier.objects.filter(idGroupe=i.id,anneeStage=pk).count())
                         organismes.append(organ)
     
-    pfe =Organisme.objects.all() #tout les organismes
-    
 
+    
     #----------------------------------------------------------------------------
-    #les années
-    anne = []
+
+    #Taux d'évolution du nombre d'organismes ayant reçus des stagiaires PFE.
+
+    
+    anne = []  #les années
+
     for p in Stagier.objects.distinct().values_list('anneeStage'):
         for s in p:
             anne.append(s)
     anne.sort()
+    
+
+
+    cp = 0
+    evolution=[]
+    for annee in anne:
+        for organ in Organisme.objects.all():
+            for p in Promoteur.objects.filter(idOrganisme=organ.id):
+                for m in Stage.objects.filter(idPromoteur=p.id,typeStage=3):
+                    for q in Groupe.objects.filter(numStage=m.id):  
+                        if str(q.dateDebutStage.year) == annee:
+                            cp = cp + 1    
+        
+        evolution.append(cp)
+        cp = 0  
+   
+
     #------------------------------------------------------------
+    
     #Répartition des PFE / entreprise
     pfe_count=[]
     list_organismes = [] 
@@ -111,28 +140,18 @@ def anneefiltre(request,pk):
                 for i in Groupe.objects.filter(numStage=m.id):
                     for s in Stagier.objects.filter(idGroupe=i.id,anneeStage=pk):
                         if l in list_organismes:
-                            
                             pfe_count[list_organismes.index(l)] =Stage.objects.filter(idPromoteur=p.id,typeStage=3).count() + pfe_count[list_organismes.index(l)] 
                         else:
                             pfe_count.append(Stage.objects.filter(idPromoteur=p.id,typeStage=3).count())
                             list_organismes.append(l)
-                            # count =Stage.objects.filter(idPromoteur=p.id,typeStage=3).count() 
-                            # nomOrgan = l.nomOrganisme
-                            # pfe_count.append({'count':count, 'nomOrganisme':nomOrgan})
-                        # pfe_count.append(Stage.objects.filter(idPromoteur=p.id,typeStage=3).count()) #id de 3CS est :3 
-    # stages = []
-    # for st in Stagier.objects.filter(anneeStage= pk).values('idGroupe'):
-    #     for gr in Groupe.objects.filter(id= st['idGroupe']).values('numStage'):
-    #         stages.append( Stage.objects.filter(id = gr['numStage']).values())
 
     context = {
         'organismes':organismes,
         'stages_count':stages_count,
-        'organ':organ,
         'anne':anne,
         'pfe_count':pfe_count,
-        'list_organismes': list_organismes, 
-        'pfe':pfe,
+        'list_organismes' : list_organismes,
+        'evolution' : evolution,
     }
     return render(request,"dashboard/index.html",context)
 
