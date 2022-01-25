@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 #index view /main page
 @login_required(login_url='user-login')
 def index(request):
+    #inclh ymchi
     # Etat de classement des organismes partenaires professionnels de l'ESI sur la base du nombre de stagiaires retenus.
     stages_count=[]
     organismes=[]
