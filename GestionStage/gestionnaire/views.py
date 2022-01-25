@@ -1,4 +1,6 @@
 
+from datetime import datetime
+
 from django.shortcuts import redirect, render
 
 
@@ -29,13 +31,42 @@ def index(request):
         for s in p:
             anne.append(s)
     anne.sort()
+
+
+
     #Taux d'évolution du nombre d'organismes ayant reçus des stagiaires PFE.
+
+    # evolution=[]
+    
+    # for year in anne:
+    #     for org in Organisme.objects.all():
+    #         for prom in Promoteur.objects.filter(idOrganisme=org.id):
+    #             for st in Stage.objects.filter(typeStage=3, idPromoteur = prom.id):
+    #                 if st.dateDebutStage.year == year:
+    #                     evolution.append(Stage.objects.filter(typeStage=3, idPromoteur = prom.id).count())
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
     evolution=[]
     for organ in Organisme.objects.all():
         for p in Promoteur.objects.filter(idOrganisme=organ.id):
             for m in Stage.objects.filter(idPromoteur=p.id,typeStage=3):
                 for i in Groupe.objects.filter(numStage=m.id):
                     evolution.append(Stagier.objects.filter(idGroupe=i.id).count())
+    
+    
     #Répartition des PFE / entreprise
     pfe_count=[] 
     for i in Organisme.objects.all():
@@ -369,7 +400,7 @@ def getStagier(request):
 
 @login_required(login_url='user-login')
 def StagierDelete(request, pk):
-    item = Stagier.objects.get(matricule=pk)
+    item = Stagier.objects.get(id=pk)
     if request.method == 'POST':
         item.delete()
         return redirect('dashboard-Stagier')
@@ -383,7 +414,7 @@ def StagierDelete(request, pk):
 
 @login_required(login_url='user-login')
 def StagierEdit(request, pk):
-    item = Stagier.objects.get(matricule=pk)
+    item = Stagier.objects.get(id=pk)
     if request.method == 'POST':
         form = StagierForm(request.POST, instance=item)
         if form.is_valid():

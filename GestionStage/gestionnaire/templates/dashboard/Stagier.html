@@ -136,7 +136,7 @@
               <a
                
                 class="btn btn-info btn-sm mr-2 ModalEdit"
-                data-popup-url="{% url 'dashboard-Stagier-edit' item.matricule %}"
+                data-popup-url="{% url 'dashboard-Stagier-edit' item.id %}"
                
                 data-toggle="modal"
                 data-target="#editModal"
@@ -144,7 +144,7 @@
               >
               <a
                 class="btn btn-danger btn-sm ml-2 ModalDelete"
-                data-popup-url="{% url 'dashboard-Stagier-delete' item.matricule %}"
+                data-popup-url="{% url 'dashboard-Stagier-delete' item.id %}"
                 data-toggle="modal"
                 data-target="#deleteModal"
            

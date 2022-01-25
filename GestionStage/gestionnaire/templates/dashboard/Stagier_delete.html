@@ -7,7 +7,7 @@
         <div class="border p-3 bg-white">
             <h3>Delete Item</h3>
             <hr>
-            <form method="POST" action="{% url 'dashboard-Stagier-delete' item.matricule %}">
+            <form method="POST" action="{% url 'dashboard-Stagier-delete' item.id %}">
                 <div class="alert alert-danger">
                     <h4> voulez vous vraiment supprimer l'eregistrement? {{ item }}?</h4>
                 </div>

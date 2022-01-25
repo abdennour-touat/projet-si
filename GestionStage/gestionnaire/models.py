@@ -36,6 +36,8 @@ class Stage(models.Model):
     nomStage=models.CharField("Titre du Satge",max_length=120)
     typeStage=models.ForeignKey(TypeStage, on_delete=models.CASCADE, verbose_name="type du stsge")
     idPromoteur=models.ForeignKey(Promoteur, on_delete=models.CASCADE, verbose_name="Promoteur")
+    dateDebutStage = models.DateField(auto_now=False, auto_now_add=False,null= True)
+    
 
     def __str__(self):
         return f'{self.nomStage}'
@@ -53,10 +55,11 @@ class Encadreur(models.Model):
 class Groupe(models.Model):
     numStage = models.ForeignKey(Stage, on_delete=models.CASCADE, verbose_name="titre stage")
     idEncadreur = models.ForeignKey(Encadreur, on_delete=models.CASCADE, verbose_name="Nom de l'encadreur")
-
+    dateremise = models.DateField(auto_now=False, auto_now_add=False,blank= True ,null= True)
 
     def __str__(self):
         return f'{self.id}'
+
 
 
 
@@ -68,7 +71,7 @@ class Stagier(models.Model):
     ('2CS', '2CS'),
     ('3CS', '3CS'),
     )
-    matricule = models.CharField("Matricule",max_length=12,primary_key=True)
+    matricule = models.CharField("Matricule",max_length=12)
     anneeStage = models.CharField("Annee du stage",max_length=12)
     nomStagier = models.CharField("Nom",max_length=120)
     prenomStagier = models.CharField("Prenom",max_length=120)
@@ -76,8 +79,10 @@ class Stagier(models.Model):
     idGroupe = models.ForeignKey(Groupe, on_delete=models.CASCADE, verbose_name="ID groupe")
     emailStagier = models.EmailField("email",max_length=100)
     numeroTelephoneStagier = PhoneNumberField("Numero de telephone",unique = False, null = False, blank = False)    
+
+    class Meta:
+        unique_together = ['matricule','anneeStage']
+
     def __str__(self):
-        return f'{self.nomStagier}-{self.prenomStagier}'
-
-
+        return f'{self.id}-{self.nomStagier}-{self.prenomStagier}'
 
