@@ -36,7 +36,7 @@ class Stage(models.Model):
     nomStage=models.CharField("Titre du Satge",max_length=120)
     typeStage=models.ForeignKey(TypeStage, on_delete=models.CASCADE, verbose_name="type du stsge")
     idPromoteur=models.ForeignKey(Promoteur, on_delete=models.CASCADE, verbose_name="Promoteur")
-    dateDebutStage = models.DateField(auto_now=False, auto_now_add=False,null= True)
+    
     
 
     def __str__(self):
@@ -55,11 +55,11 @@ class Encadreur(models.Model):
 class Groupe(models.Model):
     numStage = models.ForeignKey(Stage, on_delete=models.CASCADE, verbose_name="titre stage")
     idEncadreur = models.ForeignKey(Encadreur, on_delete=models.CASCADE, verbose_name="Nom de l'encadreur")
-    dateremise = models.DateField(auto_now=False, auto_now_add=False,blank= True ,null= True)
+    dateDebutStage = models.DateField(auto_now=False, auto_now_add=False)
+    dateRemise = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
 
     def __str__(self):
         return f'{self.id}'
-
 
 
 
