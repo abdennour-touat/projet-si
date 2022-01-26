@@ -8,7 +8,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
     <!-- Bootstrap CSS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -25,16 +26,19 @@
   <style>
     body{
       /* background-color: #2E3440; */
-      background: linear-gradient(65deg, #88C0D0, #4C566A);
-      /* background: rgb(41, 46, 57); */
+      /* background: linear-gradient(65deg, #88C0D0, #4C566A); */
+      background: rgb(41, 46, 57);
       
     }
   </style>
   <body>
-    {% include 'partials/navbar.html' %}
-  
+    <div class="hide-navbar">
+
+      {% include 'partials/navbar.html' %}
+    
+    </div>
    
-    <div class="w-75 mx-auto">
+    <div class="w-75 mx-auto ">
 
       {% block content %}
 

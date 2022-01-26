@@ -3,19 +3,119 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="row my-4">
-    <div class="col-md-6 offset-md-3">
-        <div class="border p-3 bg-white">
-            <h4>Login</h4>
-            <hr>
-            <form method="POST">
+<div class="image ">
+    <a class="mx-auto" href="{% url 'dashboard-index' %}"
+      ><img
+        style="width: 200px"
+        src="https://lria.usthb.dz/sites/default/files/inline-images/USTHB_Logo%20WHITE.png"
+        alt="usth fucking b"
+    /></a>
+  </div>
+<div class="holder shadow w-50 mx-auto">
+   
+        <div class="">
+            <h2 style="text-align:center; padding:  10px">Login</h2>
+          
+            <form method="POST" class="form">
                 {% csrf_token %}
                 {{ form|crispy }}
-                <input class="btn btn-success" type="submit" value="Login">
+                <div class="text-center">
+
+                    <button class="button" type="submit" value="Login"><i class="fa fa-sign-in mr-2" ></i>  Login</button>
+                </div>
             </form>
-        </div>
+
     </div>
 </div>
+<script>
+    console.log($(".form input")[1])
+    $(".form input")[1].setAttribute("placeholder", 'Username');
+    $(".form input")[2].setAttribute("placeholder", 'Password');
 
+</script>
+<style>
+  .hide-navbar {
+    display: none;
+  }
+  .holder {
+    border-radius: 20px;
+    padding:  1rem;
+    /* text-align: center; */
+    color: rgb(236, 239, 244);
+    margin-top: 5rem;
+    background-color: rgb(46, 52, 64);
+  }
+  .button {
+   margin-top: 1.3rem;
+    font-size: inherit;
+    text-align: center;
+    text-decoration: none;
+
+    white-space: nowrap;
+    border: none;
+    border-radius: 0.25em;
+    background: none rgb(136, 192, 208);
+    padding: 0.45em 1em;
+    user-select: none;
+    line-height: 1.15;
+    color: rgb(59, 66, 82);
+  }
+  .button:hover {
+    color: rgb(236, 239, 244);
+    transition: background-color 200ms ease-in 0s, border-color 200ms ease-in 0s,
+      box-shadow 200ms ease-in 0s, color 200ms ease-in 0s;
+    background: #88c0d0;
+  }
+  .image{
+      /* display: block;*/
+      margin-top: 3rem;
+  margin-left: auto;
+  margin-right: auto; 
+  width: 200px;
+    }
+    .form {
+    background: transparent;
+    transition: all 0.2s ease-in-out;
+    opacity: 95%;
+
+  }
+  .form label {
+      display: none;
+    font-weight: 500;
+
+    color: #eceff4;
+    font-size: 1.3rem;
+
+  
+	transition: .25s ease;
+  }
+  
+  .form input {
+    outline-style: none;
+    border: 1px solid transparent;
+    color: rgb(236, 239, 244);
+    border-radius: 4px;
+
+    background-color: rgb(46, 52, 64);
+
+    font: inherit;
+    font-size: 1.125rem;
+    padding: 4px;
+    /* box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); */
+    box-shadow: none!important;
+      border-bottom: 1px solid rgb(236, 239, 244);
+   
+    /* text-align: center; */
+  }
+ 
+  .form input:focus{
+      background-color: rgb(46, 52, 64);
+      outline: none!important;
+      border: 1px solid transparent;
+      color: rgb(236, 239, 244);
+      border-bottom: 1px solid rgb(236, 239, 244);
+  }
+
+</style>
 
 {% endblock %}

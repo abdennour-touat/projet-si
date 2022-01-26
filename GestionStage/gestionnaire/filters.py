@@ -7,7 +7,7 @@ from django.forms.widgets import TextInput
 
 #stage filter
 class StageFilter(django_filters.FilterSet):
-	nomStage = CharFilter(field_name='nomStage', lookup_expr='icontains',widget=TextInput(attrs={'placeholder': '  .......'}))
+	nomStage = CharFilter(field_name='nomStage', lookup_expr='icontains',widget=TextInput(attrs={'placeholder': '  Titre de Stage'}))
 	class Meta:
 		model = Stage
 		fields = ['nomStage','typeStage'] # the attributs we are filtering

@@ -1,20 +1,66 @@
-{% extends 'partials/base.html' %}
-{% block title %}Logout{% endblock %}
+{% extends 'partials/base.html' %} {% block title %}Logout{% endblock %} 
+{%block content %}
 
-
-{% block content %}
-<div class="row my-4">
-    <div class="col-md-6 offset-md-3">
-        <div class="border p-3 bg-white">
-            <h4>Logout</h4>
-            <hr>
-            <div class="alert alert-info">
-                <h5>You have been logged out</h5>
-            </div>
-            <a href="{% url 'user-login' %}">Login</a>
-        </div>
-    </div>
+<div class="image ">
+  <a class="mx-auto" href="{% url 'dashboard-index' %}"
+    ><img
+      style="width: 200px"
+      src="https://lria.usthb.dz/sites/default/files/inline-images/USTHB_Logo%20WHITE.png"
+      alt="usth fucking b"
+  /></a>
 </div>
-
+<div class="holder shadow w-50 mx-auto">
+  <h2 style="padding:  10px">You have been logged out!</h2>
+  <hr style="background: rgb(236, 239, 244)" />
+  <div class="">
+    <!-- <h5>You have been logged out</h5> -->
+  </div>
+  <a style="text-decoration: none" class="button" href="{% url 'user-login' %}"
+    >Login</a
+  >
+</div>
+<style>
+  .hide-navbar {
+    display: none;
+  }
+  .holder {
+    border-radius: 20px;
+    padding:  1rem;
+    text-align: center;
+    color: rgb(236, 239, 244);
+    margin-top: 7rem;
+    background-color: rgb(46, 52, 64);
+  }
+  .button {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: inherit;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    border: none;
+    border-radius: 0.25em;
+    background: none rgb(136, 192, 208);
+    padding: 0.45em 1em;
+    user-select: none;
+    line-height: 1.15;
+    color: rgb(59, 66, 82);
+  }
+  .button:hover {
+    color: rgb(236, 239, 244);
+    transition: background-color 200ms ease-in 0s, border-color 200ms ease-in 0s,
+      box-shadow 200ms ease-in 0s, color 200ms ease-in 0s;
+    background: #88c0d0;
+  }
+  .image{
+      /* display: block;*/
+      margin-top: 3rem;
+  margin-left: auto;
+  margin-right: auto; 
+  width: 200px;
+    }
+</style>
 
 {% endblock %}
