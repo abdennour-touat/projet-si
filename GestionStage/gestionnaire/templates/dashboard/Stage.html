@@ -2,30 +2,29 @@
 {%load crispy_forms_tags %} {% block content %}
 <!-- Modal -->
 <div
-  class="modal fade  "
+  class="modal fade"
   id="addModal"
   tabindex="-1"
   role="dialog"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
-  style="border-radius: 20px;"
+  style="border-radius: 20px"
 >
   <div class="modal-dialog" role="document">
-     
-    <div class="modal-content" style="border-radius: 25px;">
-      <div class="modal-body  my-modal">
+    <div class="modal-content mx-2" style="border-radius: 25px">
+      <div class="modal-body my-modal ">
         <div class="">
-          <div class="">
+          <div class=" mx-4">
             <h3 class="text-center">Ajouter Stage</h3>
-            <hr style="background: rgb(236, 239, 244)"/>
+            <hr style="background: rgb(236, 239, 244)" />
             <form method="POST" class="form2">
               {% csrf_token %} {{ form|crispy }}
-              <input class="btn btn-success" type="submit" value="Add" />
+              <button class="btn ModalEdit" type="submit" value="Add" >   <i class="fa fa-plus"></i> Add</button>
               <button
                 type="button"
-                class="btn btn-secondary"
+                class="btn  ModalDelete"
                 data-dismiss="modal"
-              >
+              ><i class="fa fa-times"></i>
                 Close
               </button>
             </form>
@@ -35,42 +34,73 @@
     </div>
   </div>
   <style>
+    .form2 button{
+      margin: 8px;
+      text-align: center!important;
+    }
     .form2 label {
       /* display: none; */
-    font-weight: 500;
+      font-weight: 500;
 
-    color: #eceff4;
-    font-size: 1.3rem;
+      color: #eceff4;
+      font-size: 1.3rem;
 
-  
-	transition: .25s ease;
-  }
-  
-  .form2 input {
-    outline-style: none;
-    border: 1px solid transparent;
-    color: rgb(236, 239, 244);
-    border-radius: 4px;
+      transition: 0.25s ease;
+    }
+    .form2 option {
+      font-weight: 500;
+      color: #eceff4;
+      opacity: 0.7;
+      font-size: 1rem;
+      margin-top: 0;
+      margin-bottom: 60px;
+      text-shadow: 2px 2px 4px white;
+    }
+    .form2 select {
+      outline-style: none;
+      border: 1px solid transparent;
+      color: rgb(236, 239, 244);
+      border-radius: 4px;
 
-    background-color: rgb(46, 52, 64);
-
-    font: inherit;
-    font-size: 1.125rem;
-    padding: 4px;
-    /* box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); */
-    box-shadow: none!important;
-      border-bottom: 1px solid rgb(236, 239, 244);
-   
-    /* text-align: center; */
-  }
- 
-  .form2 input:focus{
       background-color: rgb(46, 52, 64);
-      outline: none!important;
+      /* background: #81A1C1; */
+      font: inherit;
+      font-size: 1.125rem;
+      padding: 4px 50px;
+      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+      transition: border-color 100ms ease-in-out 0s, color 400ms ease-in-out 0s,
+        background-color 400ms ease-in-out 0s;
+      text-align: center;
+    }
+    .form2 select:focus {
+      background-color: rgb(46, 52, 64);
+      color: rgb(236, 239, 244);
+    }
+    .form2 input {
+      outline-style: none;
+      border: 1px solid transparent;
+      color: rgb(236, 239, 244);
+      border-radius: 4px;
+
+      background-color: rgb(46, 52, 64);
+
+      font: inherit;
+      font-size: 1.125rem;
+      padding: 4px;
+      /* box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); */
+      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid rgb(236, 239, 244);
+
+      /* text-align: center; */
+    }
+    .form2 input:focus {
+      background-color: rgb(46, 52, 64);
+      outline: none !important;
       border: 1px solid transparent;
       color: rgb(236, 239, 244);
       border-bottom: 1px solid rgb(236, 239, 244);
-  }
+    }
+
   </style>
 </div>
 <div
@@ -82,10 +112,11 @@
   aria-hidden="true"
 >
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body" id="editbody"></div>
+    <div class="modal-content mx-2"  style="border-radius: 25px">
+      <div class="modal-body my-modal " id="editbody"></div>
     </div>
   </div>
+  
 </div>
 <div
   class="modal fade row"
@@ -96,8 +127,8 @@
   aria-hidden="true"
 >
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">{% csrf_token %}</div>
+    <div class="modal-content mx-2"style="border-radius: 25px">
+      <div class="modal-body my-modal">{% csrf_token %}</div>
     </div>
   </div>
 </div>
@@ -256,13 +287,11 @@
   .button:hover {
     transition: background-color 200ms ease-in 0s, border-color 200ms ease-in 0s,
       box-shadow 200ms ease-in 0s, color 200ms ease-in 0s;
-
   }
   table {
     border-radius: 50px !important;
     background: transparent !important;
   }
-
 
   tbody {
     background: rgb(41, 46, 57);
@@ -308,7 +337,7 @@
   .holder::-webkit-scrollbar {
     display: none;
   }
-  .my-modal{
+  .my-modal {
     background-color: rgb(41, 46, 57);
     color: #eceff4 !important;
     border-radius: 20px;
