@@ -1,39 +1,32 @@
 {% extends 'partials/base.html' %} {% block title %}Stagier Page{% endblock %}
 {% load crispy_forms_tags %} {% block content %}
 <div
-  class="modal fade row"
+  class="modal fade"
   id="addModal"
   tabindex="-1"
   role="dialog"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
+  style="border-radius: 20px"
 >
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
+    <div class="modal-content mx-2" style="border-radius: 25px">
+      <div class="modal-body my-modal">
         <div class="">
-          <div class="card card-body">
-            <h5>Ajouter Stage</h5>
-            <hr />
-            <form method="POST">
+          <div class="mx-4">
+            <h3 class="text-center">Ajouter Stage</h3>
+            <hr style="background: rgb(236, 239, 244)" />
+            <form method="POST" class="form2">
               {% csrf_token %} {{ form|crispy }}
-              <input class="btn btn-success" type="submit" value="Add" />
+              <button class="btn ModalEdit" type="submit" value="Add">
+                <i class="fa fa-plus"></i> Add
+              </button>
               <button
                 type="button"
-                class="btn btn-secondary"
+                class="btn ModalDelete"
                 data-dismiss="modal"
               >
+                <i class="fa fa-times"></i>
                 Close
               </button>
             </form>
@@ -42,6 +35,74 @@
       </div>
     </div>
   </div>
+  <style>
+    .form2 button {
+      margin: 8px;
+      text-align: center !important;
+    }
+    .form2 label {
+      /* display: none; */
+      font-weight: 500;
+
+      color: #eceff4;
+      font-size: 1.3rem;
+
+      transition: 0.25s ease;
+    }
+    .form2 option {
+      font-weight: 500;
+      color: #eceff4;
+      opacity: 0.7;
+      font-size: 1rem;
+      margin-top: 0;
+      margin-bottom: 60px;
+      text-shadow: 2px 2px 4px white;
+    }
+    .form2 select {
+      outline-style: none;
+      border: 1px solid transparent;
+      color: rgb(236, 239, 244);
+      border-radius: 4px;
+
+      background-color: rgb(46, 52, 64);
+      /* background: #81A1C1; */
+      font: inherit;
+      font-size: 1.125rem;
+      padding: 4px 50px;
+      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+      transition: border-color 100ms ease-in-out 0s, color 400ms ease-in-out 0s,
+        background-color 400ms ease-in-out 0s;
+      text-align: center;
+    }
+    .form2 select:focus {
+      background-color: rgb(46, 52, 64);
+      color: rgb(236, 239, 244);
+    }
+    .form2 input {
+      outline-style: none;
+      border: 1px solid transparent;
+      color: rgb(236, 239, 244);
+      border-radius: 4px;
+
+      background-color: rgb(46, 52, 64);
+
+      font: inherit;
+      font-size: 1.125rem;
+      padding: 4px;
+      /* box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); */
+      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid rgb(236, 239, 244);
+
+      /* text-align: center; */
+    }
+    .form2 input:focus {
+      background-color: rgb(46, 52, 64);
+      outline: none !important;
+      border: 1px solid transparent;
+      color: rgb(236, 239, 244);
+      border-bottom: 1px solid rgb(236, 239, 244);
+    }
+  </style>
 </div>
 <div
   class="modal fade row"
@@ -52,19 +113,8 @@
   aria-hidden="true"
 >
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="editbody"></div>
+    <div class="modal-content mx-2" style="border-radius: 25px">
+      <div class="modal-body my-modal" id="editbody"></div>
     </div>
   </div>
 </div>
@@ -77,36 +127,32 @@
   aria-hidden="true"
 >
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">{% csrf_token %}</div>
+    <div class="modal-content mx-2" style="border-radius: 25px">
+      <div class="modal-body my-modal">{% csrf_token %}</div>
     </div>
   </div>
 </div>
 <div class="text-center my-4">
   <div>
-    <div class="text-center">
-      <div class="card card-body">
+    <div class="text-center mb-4">
+      <div class="">
+        <form method="get" class="form">
+          {{myFilter.form}}
 
-        <form method="get">
-            {{myFilter.form}}
-
-        <button class="btn btn-primary" type="submit">Search</button>
-      </form>
-
+          <button class="button" type="submit">
+            <i class="fa fa-search"></i> Search
+          </button>
+        </form>
+      </div>
     </div>
-    </div>
-    <div style="height: 550px; overflow: scroll">
+    <div  class="shadow holder"
+    style="
+      height: 550px;
+      overflow: scroll;
+      background: rgb(41, 46, 57);
+      border-radius: 20px;
+      opacity: 86% !important;
+    ">
       <table class="table bg-white mb-0">
         <thead class="bg-info text-white">
           <tr>
@@ -134,22 +180,18 @@
             <td>{{ item.niveauDetude }}</td>
             <td>
               <a
-               
-                class="btn btn-info btn-sm mr-2 ModalEdit"
+                class="btn btn-sm mr-1 ModalEdit"
                 data-popup-url="{% url 'dashboard-Stagier-edit' item.id %}"
-               
                 data-toggle="modal"
                 data-target="#editModal"
-                >Edit</a
+                ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a
               >
               <a
-                class="btn btn-danger btn-sm ml-2 ModalDelete"
+              class="btn btn-sm ml-1 ModalDelete"
                 data-popup-url="{% url 'dashboard-Stagier-delete' item.id %}"
                 data-toggle="modal"
                 data-target="#deleteModal"
-           
-                
-                >Delete</a
+                ><i class="fa fa-trash" aria-hidden="true"></i>Delete</a
               >
             </td>
           </tr>
@@ -159,18 +201,156 @@
     </div>
   </div>
   <button
-    type="button"
-    class="btn btn-primary text-center mt-3"
+  type="button"
+    class="btn text-center mt-3 Ajouter"
     data-toggle="modal"
     style="font-size: 20px"
     data-target="#addModal"
   >
-    Ajouter Stage
+  <i class="fa fa-plus"></i>
+    Ajouter Stagier
   </button>
 </div>
 <style>
-  .stagier{
-    background-color: #88C0D0;
+  .stagier {
+    background-color: #88c0d0;
+  }
+
+  .form {
+    background: transparent;
+
+    height: 60px !important;
+    padding: 0.5em;
+    height: 320px;
+
+    border-bottom: 1px solid #d8dee9;
+
+    transition: all 0.2s ease-in-out;
+    opacity: 95%;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-evenly;
+  }
+  .form label {
+    display: none;
+    font-weight: 500;
+    /* color: rgb(76, 86, 106); */
+    color: #eceff4;
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 60px;
+  }
+  .form option {
+    font-weight: 500;
+    color: #eceff4;
+    opacity: 0.7;
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 60px;
+    text-shadow: 2px 2px 4px white;
+  }
+  .form input {
+    outline-style: none;
+    border: 1px solid transparent;
+    color: rgb(236, 239, 244);
+    border-radius: 4px;
+    /* padding: 0.5em 1em 0.5em 2em; */
+    background-color: rgb(46, 52, 64);
+    /* background: #81A1C1; */
+    font: inherit;
+    font-size: 1.125rem;
+    padding: 4px;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+    transition: border-color 100ms ease-in-out 0s, color 400ms ease-in-out 0s,
+      background-color 400ms ease-in-out 0s;
+    /* text-align: center; */
+  }
+  .form select {
+    outline-style: none;
+    border: 1px solid transparent;
+    color: rgb(236, 239, 244);
+    border-radius: 4px;
+
+    background-color: rgb(46, 52, 64);
+    /* background: #81A1C1; */
+    font: inherit;
+    font-size: 1.125rem;
+    padding: 4px 50px;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+    transition: border-color 100ms ease-in-out 0s, color 400ms ease-in-out 0s,
+      background-color 400ms ease-in-out 0s;
+    text-align: center;
+  }
+  .button {
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    border: none;
+    border-radius: 0.25em;
+    background: none rgb(136, 192, 208);
+    padding: 0.45em 1em;
+    user-select: none;
+    line-height: 1.15;
+    color: rgb(59, 66, 82);
+  }
+  .button:hover {
+    transition: background-color 200ms ease-in 0s, border-color 200ms ease-in 0s,
+      box-shadow 200ms ease-in 0s, color 200ms ease-in 0s;
+  }
+  table {
+    border-radius: 50px !important;
+    background: transparent !important;
+  }
+
+  tbody {
+    background: rgb(41, 46, 57);
+    border-top: none;
+    color: #eceff4 !important;
+  }
+  table td {
+    padding: 0.95em !important;
+    border-bottom: 1px solid #eceff4 !important;
+    vertical-align: middle !important;
+    font-size: 1em;
+  }
+  table th {
+    padding: 0.65em !important;
+    font-size: 1.1em;
+    border-top: 0px !important;
+    vertical-align: middle !important;
+  }
+  .table thead th {
+    border-bottom: 0px;
+    /* border-radius: 50px; */
+    color: #eceff4 !important;
+    background: #5e81ac;
+  }
+  .head {
+    border-radius: 50px;
+    background: #bf616a;
+  }
+  .ModalEdit {
+    color: #eceff4 !important;
+    background: #8fbcbb;
+    font-size: 17px;
+  }
+  .ModalDelete {
+    color: #eceff4 !important;
+    background: #bf616a;
+    font-size: 17px;
+  }
+  .Ajouter {
+    color: rgb(59, 66, 82) !important;
+    background: rgb(136, 192, 208);
+  }
+  .holder::-webkit-scrollbar {
+    display: none;
+  }
+  .my-modal {
+    background-color: rgb(41, 46, 57);
+    color: #eceff4 !important;
+    border-radius: 20px;
   }
 </style>
 <script>
@@ -191,5 +371,10 @@
       $("#editbody").html(popup_url);
     });
   });
+
+  $(".form input")[1].setAttribute("placeholder", '  Nom');
+  $(".form input")[2].setAttribute("placeholder", '  Prenom');
+  $(".form input")[3].setAttribute("placeholder", '  Annee du Stage');
+    $(".form select")[0][0].innerHTML = "Niveau d'etude";
 </script>
 {% endblock %}

@@ -1,184 +1,195 @@
-{% extends 'partials/base.html' %}
-{% block title %} Home Page {% endblock %}
-
-
-{% block content %}
-
-<!--Graphs-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-<div class="container ">
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            Filtre par anneé
-          </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            {%for an in anne %} <li> <a class="dropdown-item" href="{%url 'dashboard-filtre' an %}"> {{an}}</a> </li>{% endfor %}
-        </ul>
-    <div class="row ">
-        <div class="col-md-6 my-4">
-            <div class="bg-white border border-primary">   
-                <div class="card-body">
-                    <canvas id="myChart1" width="400" height="300"></canvas>
-                    <script>
-                        var ctx = document.getElementById('myChart1').getContext('2d');
-                        var myChart1 = new Chart(ctx, {
-                            type: 'doughnut',
-                            data: {
-                                labels: [{% for organisme in organismes %}'{{organisme.nomOrganisme}}', {% endfor %}],
-                        datasets: [{
-                            label: 'Number of Products',
-                            data: [{% for stage in stages_count %}{{stage}},{% endfor %}],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                    borderWidth: 1
-                        }]
-                            },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        }
-                        });
-                    </script>
-                    
-                </div>
-            </div>
-            
+{% extends 'partials/base.html' %} {% block title %}Stagier Page{% endblock %}
+{% load crispy_forms_tags %} {% block content %}
+<div
+  class="modal fade row"
+  id="addModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="">
+          <div class="card card-body">
+            <h5>Ajouter Stage</h5>
+            <hr />
+            <form method="POST">
+              {% csrf_token %} {{ form|crispy }}
+              <input class="btn btn-success" type="submit" value="Add" />
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+            </form>
+          </div>
         </div>
-        <div class="col-md-6 my-4 ">
-            <div class="bg-white border border-primary">
-                <div class="card-body">
-                    <canvas id="myChart" width="400" height="300"></canvas>
-                    <script>
-                        var ctx = document.getElementById('myChart').getContext('2d');
-                        var myChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: [{% for organisme in list_organismes %}'{{organisme.nomOrganisme}}', {% endfor %}],
-                        datasets: [{
-                            label: 'Répartition des PFE / entreprise ',
-                            data: [{% for count in pfe_count %}{{count}},{% endfor %}],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                    borderWidth: 1
-                        }]
-                            },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        }
-                        });
-                    </script>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-   
-</div>  
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 my-4 ">
-            <div class="bg-white border border-primary">
-                <div class="card-body">
-                    <canvas id="myChart3" width="400" height="300"></canvas>
-                    <script>
-                        var ctx = document.getElementById('myChart3').getContext('2d');
-                        var myChart3 = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: [{% for organisme in anne %}'{{organisme}}', {% endfor %}],
-                        datasets: [{
-                            label: 'Taux dévolution du nombre dorganismes ayant reçus des stagiaires PFE',
-                            data: [{% for stage in evolution %}{{stage}},{% endfor %}],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                    borderWidth: 1
-                        }]
-                            },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        }
-                        });
-                    </script>
-                    
-                </div>
-            </div>
-            
-        </div>
-    </div>
+  </div>
 </div>
-        
-<style>
-    .container-fluid{
-        background-color: #88C0D0;
-        padding: 6rem;
-        margin-top: 6rem;
-    }
-    .char2{
-        margin-left: 16rem;
-        margin-top: 6rem;
-        border-color: black;
-        
-    }
-</style>
+<div
+  class="modal fade row"
+  id="editModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="editbody"></div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade row"
+  id="deleteModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">{% csrf_token %}</div>
+    </div>
+  </div>
+</div>
+<div class="text-center my-4">
+  <div>
+    <div class="text-center">
+      <div class="card card-body">
 
-<!--End Graphs-->
+        <form method="get">
+            {{myFilter.form}}
+
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+
+    </div>
+    </div>
+    <div style="height: 550px; overflow: scroll">
+      <table class="table bg-white mb-0">
+        <thead class="bg-info text-white">
+          <tr>
+            <th scope="col">Matricule</th>
+            <th scope="col">Annee Stage</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prenom</th>
+            <th scope="col">Telephone</th>
+            <th scope="col">Email</th>
+            <th scope="col">ID Groupe</th>
+            <th scope="col">Niveau d'etude</th>
+            <th scope="col">Option</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+          <tr>
+            <td>{{ item.matricule }}</td>
+            <td>{{ item.anneeStage }}</td>
+            <td>{{ item.nomStagier }}</td>
+            <td>{{ item.prenomStagier }}</td>
+            <td>{{ item.numeroTelephoneStagier }}</td>
+            <td>{{ item.emailStagier }}</td>
+            <td>{{ item.idGroupe }}</td>
+            <td>{{ item.niveauDetude }}</td>
+            <td>
+              <a
+               
+                class="btn btn-info btn-sm mr-2 ModalEdit"
+                data-popup-url="{% url 'dashboard-Stagier-edit' item.id %}"
+               
+                data-toggle="modal"
+                data-target="#editModal"
+                >Edit</a
+              >
+              <a
+                class="btn btn-danger btn-sm ml-2 ModalDelete"
+                data-popup-url="{% url 'dashboard-Stagier-delete' item.id %}"
+                data-toggle="modal"
+                data-target="#deleteModal"
+           
+                
+                >Delete</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <button
+    type="button"
+    class="btn btn-primary text-center mt-3"
+    data-toggle="modal"
+    style="font-size: 20px"
+    data-target="#addModal"
+  >
+    Ajouter Stage
+  </button>
+</div>
+<style>
+  .stagier{
+    background-color: #88C0D0;
+  }
+</style>
+<script>
+  $(".ModalEdit").on("click", function (e) {
+    var $popup = $("#editModal");
+    var popup_url = $(this).data("popup-url");
+    $(".modal-body", $popup).load(popup_url, function () {
+      $popup.modal("show");
+    });
+  });
+  $(".ModalDelete").on("click", function (e) {
+    e.preventDefault();
+    var $popup = $("#deleteModal");
+    var popup_url = $(this).data("popup-url");
+
+    $(".modal-body", $popup).load(popup_url, function () {
+      $popup.modal("show");
+      $("#editbody").html(popup_url);
+    });
+  });
+</script>
 {% endblock %}

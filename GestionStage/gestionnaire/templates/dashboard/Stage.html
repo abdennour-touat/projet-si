@@ -135,7 +135,7 @@
 <div class="text-center my-4">
   <div>
     <div class="text-center mb-4">
-      <form method="get" class="form">
+      <form method="get" class="form theform" >
         {{myFilter.form}}
 
         <button class="button" type="submit">
@@ -223,6 +223,7 @@
     justify-content: space-evenly;
   }
   .form label {
+    display: none;
     font-weight: 500;
     /* color: rgb(76, 86, 106); */
     color: #eceff4;
@@ -362,5 +363,8 @@
       $popup.modal("show");
     });
   });
+
+  $(".theform input")[0].setAttribute("placeholder", '  Nom Stage');
+    $(".theform select")[0][0].innerHTML = 'Type De Stage';
 </script>
 {% endblock %}

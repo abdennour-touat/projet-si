@@ -16,7 +16,7 @@ class StageFilter(django_filters.FilterSet):
 
 #Stagiere filter
 class StagiereFilter(django_filters.FilterSet):
-	matricule = CharFilter(field_name='matricule', lookup_expr='iexact')
+	matricule = CharFilter(field_name='matricule', lookup_expr='iexact',widget=TextInput(attrs={'placeholder': '   Matricule'}))
     
 
 	class Meta:
