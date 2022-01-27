@@ -1,22 +1,20 @@
-{% block title %}Supprimer Promoteur{% endblock %}
-{% load crispy_forms_tags %}
-{% block content %}  
-<div class="row my-4">
-    <div class="col-md-6 offset-md-3">
-        <div class="border p-3 bg-white">
-            <h3>Delete Item</h3>
-            <hr>
-            <form method="POST" action="{% url 'dashboard-promoteur-delete' item.id %}">
-                 
-                <div class="alert alert-danger">
-                    <h4> voulez vous vraiment supprimer l'eregistrement? {{ item }}?</h4>
-                </div>
-                {% csrf_token %}
-                {{ form|crispy }}
-                <a class="btn btn-secondary btn-sm" href="{% url 'dashboard-promoteur' %}">Cancel</a>
-                <input class="btn btn-danger btn-sm" type="submit" value="Confirm">
-            </form>
-        </div>
-    </div>
-</div>
+{% load crispy_forms_tags %} {% block content %}
+
+<h3 class="text-center">
+  <i class="px-2 fas fa-exclamation-triangle"></i>Delete Promoteur
+</h3>
+<hr style="background: rgb(236, 239, 244)"/>
+<form
+  method="POST"
+  class="form2 text-center"
+  action="{% url 'dashboard-promoteur-delete' item.id %}"
+>
+  <div class="">
+    <h4>voulez vous vraiment supprimer l'eregistrement? {{ item }}?</h4>
+  </div>
+  {% csrf_token %} {{ form|crispy }}
+  <a class="btn ModalDelete" href="{% url 'dashboard-promoteur' %}">Cancel</a>
+  <button class="btn ModalEdit" type="submit" value="Confirm">Confirm</button>
+</form>
+
 {% endblock %}

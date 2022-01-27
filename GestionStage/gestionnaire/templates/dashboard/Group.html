@@ -1,39 +1,33 @@
 {% extends 'partials/base.html' %} {% block title %}Grupe Page{% endblock %}
 {%load crispy_forms_tags %} {% block content %}
+<!-- Modal -->
 <div
-  class="modal fade row"
+  class="modal fade"
   id="addModal"
   tabindex="-1"
   role="dialog"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
+  style="border-radius: 20px"
 >
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
+    <div class="modal-content mx-2" style="border-radius: 25px">
+      <div class="modal-body my-modal">
         <div class="">
-          <div class="card card-body">
-            <h5>Ajouter Stage</h5>
-            <hr />
-            <form method="POST">
+          <div class="mx-4">
+            <h3 class="text-center">Ajouter Stage</h3>
+            <hr style="background: rgb(236, 239, 244)" />
+            <form method="POST" class="form2">
               {% csrf_token %} {{ form|crispy }}
-              <input class="btn btn-success" type="submit" value="Add" />
+              <button class="btn ModalEdit" type="submit" value="Add">
+                <i class="fa fa-plus"></i> Add
+              </button>
               <button
                 type="button"
-                class="btn btn-secondary"
+                class="btn ModalDelete"
                 data-dismiss="modal"
               >
+                <i class="fa fa-times"></i>
                 Close
               </button>
             </form>
@@ -42,6 +36,7 @@
       </div>
     </div>
   </div>
+  
 </div>
 <div
   class="modal fade row"
@@ -52,19 +47,8 @@
   aria-hidden="true"
 >
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="editbody"></div>
+    <div class="modal-content mx-2" style="border-radius: 25px">
+      <div class="modal-body my-modal" id="editbody"></div>
     </div>
   </div>
 </div>
@@ -77,36 +61,32 @@
   aria-hidden="true"
 >
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">{% csrf_token %}</div>
+    <div class="modal-content mx-2" style="border-radius: 25px">
+      <div class="modal-body my-modal">{% csrf_token %}</div>
     </div>
   </div>
 </div>
 <div class="text-center my-4">
   <div>
-    <div class="text-center">
-      <div class="card card-body">
-
-        <form method="get">
+    <div class="text-center mb-4">
+        <form method="get" class="form theform">
             {{myFilter.form}}
 
-        <button class="btn btn-primary" type="submit">Search</button>
+            <button class="button" type="submit">
+              <i class="fa fa-search"></i> Search
+            </button>
       </form>
 
+
     </div>
-    </div>
-    <div style="height: 550px; overflow: scroll">
+    <div   class="shadow holder"
+    style="
+      height: 550px;
+      overflow: scroll;
+      background: rgb(41, 46, 57);
+      border-radius: 20px;
+      opacity: 86% !important;
+    ">
       <table class="table bg-white mb-0">
         <thead class="bg-info text-white" style="position: sticky; top: 0">
           <tr>
@@ -124,18 +104,18 @@
             <td>{{ item.idEncadreur }}</td>
             <td>
               <a
-                class="btn btn-info btn-sm mr-2 ModalEdit"
+                class="btn mr-2 ModalEdit"
                 data-popup-url="{% url 'dashboard-Group-edit' item.id %}"
                 data-toggle="modal"
                 data-target="#editModal"
-                >Edit</a
+                ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Edit</a
               >
               <a
-                class="btn btn-danger btn-sm ml-2 ModalDelete"
+                class="btn ml-2 ModalDelete"
                 data-popup-url="{% url 'dashboard-Group-delete' item.id %}"
                 data-toggle="modal"
                 data-target="#deleteModal"
-                >Delete</a
+                ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a
               >
             </td>
           </tr>
@@ -145,14 +125,15 @@
     </div>
   </div>
   <button
-    type="button"
-    class="btn btn-primary text-center mt-3"
-    data-toggle="modal"
-    style="font-size: 20px"
-    data-target="#addModal"
-  >
-    Ajouter Groupe
-  </button>
+  type="button"
+  class="btn text-center mt-3 Ajouter"
+  data-toggle="modal"
+  style="font-size: 20px"
+  data-target="#addModal"
+>
+  <i class="fa fa-plus"></i>
+  Ajouter Stage
+</button>
 </div>
 <style>
   .group{
@@ -178,5 +159,11 @@
       $("#editbody").html(popup_url);
     });
   });
+  $(".theform input")[0].setAttribute("placeholder", "  DateDebutStage:");
+  $(".theform input")[1].setAttribute("placeholder", "  DateRemise");
+  $(".theform select")[1][0].innerHTML = "Nom De l'encadreur";
+
+  $(".theform select")[0][0].innerHTML = "Titre De Stage";
+
 </script>
 {% endblock %}

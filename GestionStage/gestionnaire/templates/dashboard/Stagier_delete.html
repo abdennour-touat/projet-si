@@ -1,23 +1,26 @@
+{% load crispy_forms_tags %} {% block content %}
 
+<h3 class="text-center">
+  <i class="px-2 fas fa-exclamation-triangle"></i>Delete Stagier
+</h3>
+<hr style="background: rgb(236, 239, 244)" />
+<form
+  method="POST"
+  class="form2 text-center"
+  action="{% url 'dashboard-Stagier-delete' item.id %}"
+>
+  <div class="text-center px-4">
+    <h3 class="p-2">
+      voulez vous vraiment supprimer l'enregistrement: <br />
+      "{{ item }}"?
+    </h3>
+  </div>
+  {% csrf_token %} {{ form|crispy }}
+  <a class="btn ModalEdit" href="{% url 'dashboard-Stagier' %}">Cancel</a>
+  <button class="btn ModalDelete" type="submit" value="Confirm">Confirm</button>
+</form>
 
-{% load crispy_forms_tags %}
-{% block content %}  
-
-<h3 class="text-center"> <i class=" px-2 fas fa-exclamation-triangle"></i>Delete Stagier</h3>
-<hr style="background: rgb(236, 239, 244)"/>
-            <form method="POST" class="form2 text-center"  action="{% url 'dashboard-Stagier-delete' item.id %}">
-                <div class="text-center px-4">
-                    <h3 class="p-2">voulez vous vraiment supprimer l'enregistrement: <br> "{{ item }}"?</h3>
-
-                </div>
-                {% csrf_token %}
-                {{ form|crispy }}
-                <a class="btn ModalEdit" href="{% url 'dashboard-Stagier' %}">Cancel</a>
-                <button class="btn ModalDelete" type="submit" value="Confirm"> Confirm</button>
-            </form>
-            
-            
-            <!-- <form method="POST" class="form2 text-center" action="{% url 'dashboard-Stage-delete' item.id %}">
+<!-- <form method="POST" class="form2 text-center" action="{% url 'dashboard-Stage-delete' item.id %}">
               <div class=" text-center px-4" >
                 <h3 class="p-2">voulez vous vraiment supprimer l'enregistrement: <br> "{{ item }}"?</h3>
               </div>
@@ -36,72 +39,71 @@
               </button>
             </form> -->
 <style>
-    .form2 button{
-      margin: 8px;
-      text-align: center!important;
-    }
-    .form2 label {
-      /* display: none; */
-      font-weight: 500;
-  
-      color: #eceff4;
-      font-size: 1.3rem;
-  
-      transition: 0.25s ease;
-    }
-    .form2 option {
-      font-weight: 500;
-      color: #eceff4;
-      opacity: 0.7;
-      font-size: 1rem;
-      margin-top: 0;
-      margin-bottom: 60px;
-      text-shadow: 2px 2px 4px white;
-    }
-    .form2 select {
-      outline-style: none;
-      border: 1px solid transparent;
-      color: rgb(236, 239, 244);
-      border-radius: 4px;
-  
-      background-color: rgb(46, 52, 64);
-      /* background: #81A1C1; */
-      font: inherit;
-      font-size: 1.125rem;
-      padding: 4px 50px;
-      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
-      transition: border-color 100ms ease-in-out 0s, color 400ms ease-in-out 0s,
-        background-color 400ms ease-in-out 0s;
-      text-align: center;
-    }
-    .form2 select:focus {
-      background-color: rgb(46, 52, 64);
-      color: rgb(236, 239, 244);
-    }
-    .form2 input {
-      outline-style: none;
-      border: 1px solid transparent;
-      color: rgb(236, 239, 244);
-      border-radius: 4px;
-  
-      background-color: rgb(46, 52, 64);
-  
-      font: inherit;
-      font-size: 1.125rem;
-      padding: 4px;
-      /* box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); */
-      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
-      border-bottom: 1px solid rgb(236, 239, 244);
-  
-      /* text-align: center; */
-    }
-    .form2 input:focus {
-      background-color: rgb(46, 52, 64);
-      outline: none !important;
-      border: 1px solid transparent;
-      color: rgb(236, 239, 244);
-      border-bottom: 1px solid rgb(236, 239, 244);
-    }
-  
-  </style>
+  .form2 button {
+    margin: 8px;
+    text-align: center !important;
+  }
+  .form2 label {
+    /* display: none; */
+    font-weight: 500;
+
+    color: #eceff4;
+    font-size: 1.3rem;
+
+    transition: 0.25s ease;
+  }
+  .form2 option {
+    font-weight: 500;
+    color: #eceff4;
+    opacity: 0.7;
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 60px;
+    text-shadow: 2px 2px 4px white;
+  }
+  .form2 select {
+    outline-style: none;
+    border: 1px solid transparent;
+    color: rgb(236, 239, 244);
+    border-radius: 4px;
+
+    background-color: rgb(46, 52, 64);
+    /* background: #81A1C1; */
+    font: inherit;
+    font-size: 1.125rem;
+    padding: 4px 50px;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+    transition: border-color 100ms ease-in-out 0s, color 400ms ease-in-out 0s,
+      background-color 400ms ease-in-out 0s;
+    text-align: center;
+  }
+  .form2 select:focus {
+    background-color: rgb(46, 52, 64);
+    color: rgb(236, 239, 244);
+  }
+  .form2 input {
+    outline-style: none;
+    border: 1px solid transparent;
+    color: rgb(236, 239, 244);
+    border-radius: 4px;
+
+    background-color: rgb(46, 52, 64);
+
+    font: inherit;
+    font-size: 1.125rem;
+    padding: 4px;
+    /* box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); */
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgb(236, 239, 244);
+
+    /* text-align: center; */
+  }
+  .form2 input:focus {
+    background-color: rgb(46, 52, 64);
+    outline: none !important;
+    border: 1px solid transparent;
+    color: rgb(236, 239, 244);
+    border-bottom: 1px solid rgb(236, 239, 244);
+  }
+</style>
 {% endblock %}

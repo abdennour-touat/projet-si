@@ -1,16 +1,21 @@
 
-{% block title %}Modifier Groupe{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}  
-<div class="row my-4">
-    <div class="col-md-6 offset-md-3 p-3 bg-white">
+<div class="">
+    <div class="">
         <h3>Edit Item</h3>
         <hr>
-        <form method="POST" action="{% url 'dashboard-Group-edit' item.id %}">
+        <form method="POST" class="form2" action="{% url 'dashboard-Group-edit' item.id %}">
             {% csrf_token %}
             {{ form|crispy }}
-            <a class="btn btn-secondary btn-sm" href="{% url 'dashboard-Group' %}">Cancel</a>
-            <input class="btn btn-info" type="submit" value="Confirm">
+            <a class="btn ModalDelete " href="{% url 'dashboard-Group' %}">Cancel</a>
+            <button
+            class="btn ModalEdit"
+            id="delete"
+            type="submit"
+            value="Confirm">
+          Confirm
+          </button>
         </form>
     </div>
 </div>
