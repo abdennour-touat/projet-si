@@ -16,12 +16,12 @@
         <div class="">
             <h2 style="text-align:center; padding:  10px">Login</h2>
           
-            <form method="POST" class="form">
+            <form method="POST" class="form2">
                 {% csrf_token %}
                 {{ form|crispy }}
                 <div class="text-center">
 
-                    <button class="button" type="submit" value="Login"><i class="fa fa-sign-in mr-2" ></i>  Login</button>
+                    <button class="button" type="submit" value="Login"><i class="fa fa-sign-in" ></i>  Login</button>
                 </div>
             </form>
 

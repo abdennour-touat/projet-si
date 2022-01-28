@@ -1,263 +1,317 @@
-
-
-
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css"
+    />
     <!-- Bootstrap CSS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+      integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+      crossorigin="anonymous"
+    />
     <!--Chartjs CDN-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      
+
     <!--Custome CSS-->
-    
-    <link rel="stylesheet" href="%static '/style.css' %">
-    
+
+    <link rel="stylesheet" href="%static '/style.css' %" />
+
     <title>{% block title %}{% endblock %}</title>
   </head>
   <style>
-    body{
+    body {
+      padding: 0%;
       /* background-color: #2E3440; */
       /* background: linear-gradient(65deg, #88C0D0, #4C566A); */
       background: rgb(41, 46, 57);
-      
+    }
+    .dSrfKq {
+      stroke: rgb(76, 86, 106);
+      fill: none;
+      transition: fill 400ms ease-in-out 0s;
+      z-index: -1;
+    }
+    .laHIGl {
+      position: absolute;
+      top: 520px;
+    }
+    .kjyxTd {
+      fill: rgb(41, 46, 57);
+      transition: fill 400ms ease-in-out 0s;
+    }
+    .separator{
+      position: absolute;
+      top: 200px;
+      z-index: -1;
+    }
+    .top-background{
+      position: absolute;
+      top: 0%;
+      z-index: -1;
+      height: 320px;
+      width: 100%;
+      background-color: #3b4252;
     }
   </style>
   <body>
-    <div class="hide-navbar">
+    <div class="top-background"></div>
+    <svg
+      class="DividerSvg-nhcneq-0 separator WaveDivider-dmszel-0 kjyxTd"
+      viewBox="0 0 1920 157.327"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M303.719 110.734a3330.42 3330.42 0 0 0 168.09 4.234 3320.491 3320.491 0 0 0 159.313-3.813c135.609-6.535 268.979-21.525 396.41-44.547C1296.81 17.949 1525.27 3.983 1669.51.833c151.12-3.304 243.74 4.253 250.49 4.822v151.672H0v-77.97c12.939 2.334 128.5 22.508 303.719 31.377z"
+      ></path>
+    </svg>
+    <svg
+      class="DividerSvg-nhcneq-0 laHIGl WavyLineDivider-sc-1rvcq9q-0 dSrfKq"
+      viewBox="0 0 1600 173"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1665.731 145.823c-115.382 81.947-257.301-50.789-507.113-94.011C854.859-.745 794.065 148.685 426.121 93.955 334.889 80.383 279.017 62.33 183.4 75.585 20.51 98.165-64.362 184.803-137.338 140.42c-40.128-24.406-64.669-81.136-48.761-103.736 34.158-48.53 217.973 112.638 473.523 108.058 233.32-4.18 251.403-141.599 475.689-143.718 226.76-2.141 245.44 137.972 501.695 148.04 232.694 9.144 426.896-98.152 443.183-61.593 6.454 14.485-19.273 42.026-42.26 58.352z"
+      ></path>
+    </svg>
+    <div class="hide-navbar">{% include 'partials/navbar.html' %}</div>
 
-      {% include 'partials/navbar.html' %}
-    
+    <div class="mx-auto" style="width: 85%">
+      {% block content %} {% endblock %}
     </div>
-   
-    <div class="mx-auto " style="width: 85%;">
+    <style>
+      .form2 button {
+        margin: 8px;
+        text-align: center !important;
+      }
+      .form2 label {
+        /* display: none; */
+        font-weight: 500;
 
-      {% block content %}
+        color: #eceff4;
+        font-size: 1.3rem;
 
-      {% endblock %}
-  </div>
-  <style>
-    .form2 button {
-      margin: 8px;
-      text-align: center !important;
-    }
-    .form2 label {
-      /* display: none; */
-      font-weight: 500;
+        transition: 0.25s ease;
+      }
+      .form2 option {
+        font-weight: 500;
+        color: #eceff4;
+        opacity: 0.7;
+        font-size: 1rem;
+        margin-top: 0;
+        margin-bottom: 60px;
+        text-shadow: 2px 2px 4px white;
+      }
+      .form2 select {
+        outline-style: none;
+        border: 1px solid transparent;
+        color: rgb(236, 239, 244);
+        border-radius: 4px;
 
-      color: #eceff4;
-      font-size: 1.3rem;
+        background-color: rgb(46, 52, 64);
+        /* background: #81A1C1; */
+        font: inherit;
+        font-size: 1.125rem;
+        padding: 4px 50px;
+        box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+        transition: border-color 100ms ease-in-out 0s,
+          color 400ms ease-in-out 0s, background-color 400ms ease-in-out 0s;
+        text-align: center;
+      }
+      .form2 select:focus {
+        background-color: rgb(46, 52, 64);
+        color: rgb(236, 239, 244);
+      }
+      .form2 input {
+        outline-style: none;
+        border: 1px solid transparent;
+        color: rgb(236, 239, 244);
+        border-radius: 4px;
 
-      transition: 0.25s ease;
-    }
-    .form2 option {
-      font-weight: 500;
-      color: #eceff4;
-      opacity: 0.7;
-      font-size: 1rem;
-      margin-top: 0;
-      margin-bottom: 60px;
-      text-shadow: 2px 2px 4px white;
-    }
-    .form2 select {
-      outline-style: none;
-      border: 1px solid transparent;
-      color: rgb(236, 239, 244);
-      border-radius: 4px;
+        background-color: rgb(46, 52, 64);
 
-      background-color: rgb(46, 52, 64);
-      /* background: #81A1C1; */
-      font: inherit;
-      font-size: 1.125rem;
-      padding: 4px 50px;
-      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
-      transition: border-color 100ms ease-in-out 0s, color 400ms ease-in-out 0s,
-        background-color 400ms ease-in-out 0s;
-      text-align: center;
-    }
-    .form2 select:focus {
-      background-color: rgb(46, 52, 64);
-      color: rgb(236, 239, 244);
-    }
-    .form2 input {
-      outline-style: none;
-      border: 1px solid transparent;
-      color: rgb(236, 239, 244);
-      border-radius: 4px;
+        font: inherit;
+        font-size: 1.125rem;
+        padding: 4px;
+        /* box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); */
+        box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+        border-bottom: 1px solid rgb(236, 239, 244);
 
-      background-color: rgb(46, 52, 64);
+        /* text-align: center; */
+      }
+      .form2 input:focus {
+        background-color: rgb(46, 52, 64);
+        outline: none !important;
+        border: 1px solid transparent;
+        color: rgb(236, 239, 244);
+        border-bottom: 1px solid rgb(236, 239, 244);
+      }
+    </style>
+    <style>
+      .form {
+        background: transparent;
 
-      font: inherit;
-      font-size: 1.125rem;
-      padding: 4px;
-      /* box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); */
-      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
-      border-bottom: 1px solid rgb(236, 239, 244);
+        height: 60px !important;
+        padding: 0.5em;
+        height: 320px;
 
-      /* text-align: center; */
-    }
-    .form2 input:focus {
-      background-color: rgb(46, 52, 64);
-      outline: none !important;
-      border: 1px solid transparent;
-      color: rgb(236, 239, 244);
-      border-bottom: 1px solid rgb(236, 239, 244);
-    }
-  </style>
-  <style>
+        border-bottom: 1px solid #d8dee9;
 
-    .form {
-      background: transparent;
-  
-      height: 60px !important;
-      padding: 0.5em;
-      height: 320px;
-  
-      border-bottom: 1px solid #d8dee9;
-  
-      /* transition: all 0.2s ease-in-out; */
-      opacity: 95%;
-      display: flex;
-      align-items: baseline;
-      justify-content: space-evenly;
-    }
-    .form label {
-      display: none;
-      font-weight: 500;
-      /* color: rgb(76, 86, 106); */
-      color: #eceff4;
-      font-size: 1.3rem;
-      margin-top: 0;
-      margin-bottom: 60px;
-    }
-    .form option {
-      font-weight: 500;
-      color: #eceff4;
-      opacity: 0.7;
-      font-size: 1rem;
-      margin-top: 0;
-      margin-bottom: 60px;
-      text-shadow: 2px 2px 4px white;
-    }
-    .form input {
-      outline-style: none;
-      border: 1px solid transparent;
-      color: rgb(236, 239, 244);
-      border-radius: 4px;
-      /* padding: 0.5em 1em 0.5em 2em; */
-      background-color: rgb(46, 52, 64);
-      /* background: #81A1C1; */
-      font: inherit;
-      font-size: 1.125rem;
-      padding: 4px;
-      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
-      /* transition: border-color 100ms ease-in-out 0s, color 400ms ease-in-out 0s,
+        /* transition: all 0.2s ease-in-out; */
+        opacity: 95%;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-evenly;
+      }
+      .form label {
+        display: none;
+        font-weight: 500;
+        /* color: rgb(76, 86, 106); */
+        color: #eceff4;
+        font-size: 1.3rem;
+        margin-top: 0;
+        margin-bottom: 60px;
+      }
+      .form option {
+        font-weight: 500;
+        color: #eceff4;
+        opacity: 0.7;
+        font-size: 1rem;
+        margin-top: 0;
+        margin-bottom: 60px;
+        text-shadow: 2px 2px 4px white;
+      }
+      .form input {
+        outline-style: none;
+        border: 1px solid transparent;
+        color: rgb(236, 239, 244);
+        border-radius: 4px;
+        /* padding: 0.5em 1em 0.5em 2em; */
+        background-color: rgb(46, 52, 64);
+        /* background: #81A1C1; */
+        font: inherit;
+        font-size: 1.125rem;
+        padding: 4px;
+        box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+        /* transition: border-color 100ms ease-in-out 0s, color 400ms ease-in-out 0s,
         background-color 400ms ease-in-out 0s; */
-      /* text-align: center; */
-    }
-    .form select {
-      outline-style: none;
-      border: 1px solid transparent;
-      color: rgb(236, 239, 244);
-      border-radius: 4px;
-  
-      background-color: rgb(46, 52, 64);
-      /* background: #81A1C1; */
-      font: inherit;
-      font-size: 1.125rem;
-      padding: 4px 50px;
-      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
-      /* transition: border-color 100ms ease-in-out 0s, color 400ms ease-in-out 0s,
+        /* text-align: center; */
+      }
+      .form select {
+        outline-style: none;
+        border: 1px solid transparent;
+        color: rgb(236, 239, 244);
+        border-radius: 4px;
+
+        background-color: rgb(46, 52, 64);
+        /* background: #81A1C1; */
+        font: inherit;
+        font-size: 1.125rem;
+        padding: 4px 50px;
+        box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+        /* transition: border-color 100ms ease-in-out 0s, color 400ms ease-in-out 0s,
         background-color 400ms ease-in-out 0s; */
-      text-align: center;
-    }
-    .button {
-      text-align: center;
-      text-decoration: none;
-      vertical-align: middle;
-      white-space: nowrap;
-      border: none;
-      border-radius: 0.25em;
-      background: none rgb(136, 192, 208);
-      padding: 0.45em 1em;
-      user-select: none;
-      line-height: 1.15;
-      color: rgb(59, 66, 82);
-    }
-    .button:hover {
-      transition: background-color 200ms ease-in 0s, border-color 200ms ease-in 0s,
-        box-shadow 200ms ease-in 0s, color 200ms ease-in 0s;
-    }
-    table {
-      border-radius: 50px !important;
-      background: transparent !important;
-    }
-  
-    tbody {
-      background: rgb(41, 46, 57);
-      border-top: none;
-      color: #eceff4 !important;
-    }
-    table td {
-      padding: 0.95em !important;
-      border-bottom: 1px solid #eceff4 !important;
-      vertical-align: middle !important;
-      font-size: 1em;
-    }
-    table th {
-      padding: 0.65em !important;
-      font-size: 1.1em;
-      border-top: 0px !important;
-      vertical-align: middle !important;
-    }
-    .table thead th {
-      border-bottom: 0px;
-      /* border-radius: 50px; */
-      color: #eceff4 !important;
-      background: #5e81ac;
-    }
-    .head {
-      border-radius: 50px;
-      background: #bf616a;
-    }
-    .ModalEdit {
-      color: #eceff4 !important;
-      background: #8fbcbb;
-      font-size: 17px;
-    }
-    .ModalDelete {
-      color: #eceff4 !important;
-      background: #bf616a;
-      font-size: 17px;
-    }
-    .Ajouter {
-      color: rgb(59, 66, 82) !important;
-      background: rgb(136, 192, 208);
-    }
-    .holder::-webkit-scrollbar {
-      display: none;
-    }
-    .my-modal {
-      background-color: rgb(41, 46, 57);
-      color: #eceff4 !important;
-      border-radius: 20px;
-    }
-  </style>
+        text-align: center;
+      }
+      .button {
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
+        white-space: nowrap;
+        border: none;
+        border-radius: 0.25em;
+        background: none rgb(136, 192, 208);
+        padding: 0.45em 1em;
+        user-select: none;
+        line-height: 1.15;
+        color: rgb(59, 66, 82);
+      }
+      .button:hover {
+        transition: background-color 200ms ease-in 0s,
+          border-color 200ms ease-in 0s, box-shadow 200ms ease-in 0s,
+          color 200ms ease-in 0s;
+      }
+      table {
+        border-radius: 50px !important;
+        background: transparent !important;
+      }
+
+      tbody {
+        background: rgb(41, 46, 57);
+        border-top: none;
+        color: #eceff4 !important;
+      }
+      table td {
+        padding: 0.95em !important;
+        border-bottom: 1px solid #eceff4 !important;
+        vertical-align: middle !important;
+        font-size: 1em;
+      }
+      table th {
+        padding: 0.65em !important;
+        font-size: 1.1em;
+        border-top: 0px !important;
+        vertical-align: middle !important;
+      }
+      .table thead th {
+        border-bottom: 0px;
+        /* border-radius: 50px; */
+        color: #eceff4 !important;
+        background: #5e81ac;
+      }
+      .head {
+        border-radius: 50px;
+        background: #bf616a;
+      }
+      .ModalEdit {
+        color: #eceff4 !important;
+        background: #8fbcbb;
+        font-size: 17px;
+      }
+      .ModalDelete {
+        color: #eceff4 !important;
+        background: #bf616a;
+        font-size: 17px;
+      }
+      .Ajouter {
+        color: rgb(59, 66, 82) !important;
+        background: rgb(136, 192, 208);
+      }
+      .holder::-webkit-scrollbar {
+        display: none;
+      }
+      .my-modal {
+        background-color: rgb(41, 46, 57);
+        color: #eceff4 !important;
+        border-radius: 20px;
+      }
+    </style>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+      crossorigin="anonymous"
+    ></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
