@@ -1,15 +1,15 @@
 {% block title %}Modifier Promoteur{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}  
-<div class="row my-4">
-    <div class="col-md-6 offset-md-3 p-3 bg-white">
-        <h3>Edit Item</h3>
-        <hr>
-        <form method="POST" action="{% url 'dashboard-promoteur-edit' item.id %}">
+<div >
+    <div class=" p-3 ">
+        <h3 class="text-center">Editer Promoteur</h3> 
+        <hr style="background: rgb(236, 239, 244)"/>
+        <form method="POST" class="form2" action="{% url 'dashboard-promoteur-edit' item.id %}">
             {% csrf_token %}
             {{ form|crispy }}
-            <a class="btn btn-secondary btn-sm" href="{% url 'dashboard-encadreur' %}">Cancel</a>
-            <input class="btn btn-info" type="submit" value="Confirm">
+            <a class="btn ModalDelete" href="{% url 'dashboard-encadreur' %}">Cancel</a>
+            <button class="btn ModalEdit" type="submit" value="Confirm">Confirm</button>
         </form>
     </div>
 </div>
