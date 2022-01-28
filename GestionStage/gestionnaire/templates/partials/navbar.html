@@ -1,17 +1,16 @@
 
  
 <!-- <a style="margin-left: 5rem; margin-top: 2rem;" style="font-size: 48px;text-decoration: none; color: white;" href="{% url 'dashboard-index' %}"> <p style="text-align: center;margin-top: 35px;">ESI</p></a> -->
-<div class="d-flex  justify-content-around">
-  <a class="align-self-center"  href="{% url 'dashboard-index' %}"><i class="fa fa-home fa-3x" style="color:#ECEFF4 ;"></i></a>
-  <div class="image align-self-center">
-    <a class="mx-auto"  href="{% url 'dashboard-index' %}" ><img style="width: 105px;"  src="https://lria.usthb.dz/sites/default/files/inline-images/USTHB_Logo%20WHITE.png" alt="usth fucking b" ></a>
-  </div>
-  <a class="align-self-center" href="{% url 'user-logout' %}"><i class="fa fa-sign-out-alt fa-3x " style="color:#ECEFF4 ;"></i> </a>
-</div>
+<div class="d-flex justify-content-center " style="margin-top: 1.4rem;">
+  <a class="align-self-center mx-5"  href="{% url 'dashboard-index' %}"><i class="fa fa-home fa-3x" style="color:#ECEFF4 ;"></i></a>
+  <!-- <div class="image align-self-center">
+    <a class="mx-auto"  href="{% url 'dashboard-index' %}" ><img  src="https://lria.usthb.dz/sites/default/files/inline-images/USTHB_Logo%20WHITE.png" alt="usth fucking b" ></a>
+  </div> -->
 
 
 
-<nav class="mx-auto" style="margin-top: 1rem; color: #ECEFF4; width: 80vw; ">
+
+<nav class="mx-auto align-self-center" style="margin-top: 0.4rem; color: #ECEFF4; width: 60vw;  ">
     <!-- <a class="navbar-brand text-white" href="#">ESI</a> -->
     <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -58,11 +57,16 @@
       </ul>
     </div>
   </nav>
+    
+
+<a class="align-self-center mx-5" href="{% url 'user-logout' %}"><i class="fa fa-sign-out-alt fa-3x " style="color:#ECEFF4 ;"></i> </a>
+
+</div>
   <style>
     .items{
       text-align: center;
       flex: 1;
-      padding: 5px 0;
+      padding: 2px 0;
       font-size: 20px!important;
       transition: 0.8s;
     }
@@ -74,9 +78,10 @@
       /* display: block;*/
   margin-left: 12rem;
   margin-right: 12rem; 
-  width: 105px;
+  /* width: 105px; */
     }
-  </style>
+    .image img{
+      width: 94px;
+    }
     
-  </div>
-</nav>
+  </style>

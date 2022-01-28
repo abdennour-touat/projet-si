@@ -1,184 +1,226 @@
-{% extends 'partials/base.html' %}
-{% block title %} Home Page {% endblock %}
-
-
-{% block content %}
+{% extends 'partials/base.html' %} {% block title %} Home Page {% endblock %}
+{%block content %}
 
 <!--Graphs-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-<div class="container ">
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            Filtre par anneé
-          </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            {%for an in anne %} <li> <a class="dropdown-item" href="{%url 'dashboard-filtre' an %}"> {{an}}</a> </li>{% endfor %}
-        </ul>
-    <div class="row ">
-        <div class="col-md-6 my-4">
-            <div class="bg-white border border-primary">   
-                <div class="card-body">
-                    <canvas id="myChart1" width="400" height="300"></canvas>
-                    <script>
-                        var ctx = document.getElementById('myChart1').getContext('2d');
-                        var myChart1 = new Chart(ctx, {
-                            type: 'doughnut',
-                            data: {
-                                labels: [{% for organisme in organismes %}'{{organisme.nomOrganisme}}', {% endfor %}],
-                        datasets: [{
-                            label: 'Number of Products',
-                            data: [{% for stage in stages_count %}{{stage}},{% endfor %}],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                    borderWidth: 1
-                        }]
-                            },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        }
-                        });
-                    </script>
-                    
-                </div>
-            </div>
-            
-        </div>
-        <div class="col-md-6 my-4 ">
-            <div class="bg-white border border-primary">
-                <div class="card-body">
-                    <canvas id="myChart" width="400" height="300"></canvas>
-                    <script>
-                        var ctx = document.getElementById('myChart').getContext('2d');
-                        var myChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: [{% for organisme in list_organismes %}'{{organisme.nomOrganisme}}', {% endfor %}],
-                        datasets: [{
-                            label: 'Répartition des PFE / entreprise ',
-                            data: [{% for count in pfe_count %}{{count}},{% endfor %}],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                    borderWidth: 1
-                        }]
-                            },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        }
-                        });
-                    </script>
-                </div>
-            </div>
-        </div>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+  crossorigin="anonymous"
+></script>
+<!-- 
+<div class="dropdown">
+  <button
+    class="btn btn-secondary dropdown-toggle"
+    type="button"
+    id="dropdownMenuButton1"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    Filtre par anneé
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    {%for an in anne %}
+    <li>
+      <a class="dropdown-item" href="{%url 'dashboard-filtre' an %}">
+        {{an}}</a
+      >
+    </li>
+    {% endfor %}
+  </ul>
+</div> -->
+<div class="charts-holder shadow mx-auto">
+    <div class="chart-holder">
+      <canvas class="canva" id="myChart" width="400" height="300"></canvas>
+      <script>
+           Chart.defaults.color = '#fff';
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [{% for organisme in list_organismes %}'{{organisme.nomOrganisme}}', {% endfor %}],
+        datasets: [{
+            label: 'Répartition des PFE / entreprise ',
+            data: [{% for count in pfe_count %}{{count}},{% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                    borderWidth: 1
+        }]
+            },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+        });
+      </script>
     </div>
+    <div class="data-holder "></div>
+
+    <div class="doughnut-holder">
+      <canvas class="canva" id="myChart1" width="400" height="300"></canvas>
+      <script>
+           Chart.defaults.color = '#fff';
+        var ctx = document.getElementById('myChart1').getContext('2d');
+        var myChart1 = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: [{% for organisme in organismes %}'{{organisme.nomOrganisme}}', {% endfor %}],
+                
+        datasets: [{
+            label: 'Number of Products',
+            
+            data: [{% for stage in stages_count %}{{stage}},{% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                    borderWidth: 1
+        }]
+            },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+        });
+      </script>
+    </div>
+    <div style="display: flex; justify-content: space-evenly; width: 100%; ">
+
+    
+    <div class="doughnut-holder" style="width: 60%; ">
+      <canvas class="canva" id="myChart3" height="140" ></canvas>
+      <script>
+          Chart.defaults.color = '#fff';
+        var ctx = document.getElementById('myChart3').getContext('2d');
+        var myChart3 = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [{% for organisme in anne %}'{{organisme}}', {% endfor %}],
+        datasets: [{
+
+            label: 'Taux dévolution du nombre dorganismes ayant reçus des stagiaires PFE',
+            data: [{% for stage in evolution %}{{stage}},{% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                    borderWidth: 1
+        }]
+            },
+        options: {
    
-</div>  
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 my-4 ">
-            <div class="bg-white border border-primary">
-                <div class="card-body">
-                    <canvas id="myChart3" width="400" height="300"></canvas>
-                    <script>
-                        var ctx = document.getElementById('myChart3').getContext('2d');
-                        var myChart3 = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: [{% for organisme in anne %}'{{organisme}}', {% endfor %}],
-                        datasets: [{
-                            label: 'Taux dévolution du nombre dorganismes ayant reçus des stagiaires PFE',
-                            data: [{% for stage in evolution %}{{stage}},{% endfor %}],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                    borderWidth: 1
-                        }]
-                            },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        }
-                        });
-                    </script>
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
                     
-                </div>
-            </div>
-            
-        </div>
+                    }
+                }]
+            }
+        }
+        })
+        
+      </script>
     </div>
-</div>
-        
-<style>
-    .container-fluid{
-        background-color: #88C0D0;
-        padding: 6rem;
-        margin-top: 6rem;
-    }
-    .char2{
-        margin-left: 16rem;
-        margin-top: 6rem;
-        border-color: black;
-        
-    }
-</style>
+    <div class="data-holder" ></div>
 
-<!--End Graphs-->
-{% endblock %}
+   
+    </div>
+    <style>
+      .charts-holder {
+        color: #ECEFF4!important;
+        margin-top: 18px;
+        border-radius: 20px;
+        background-color: #3b4252;
+        opacity: 95%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: center;
+        padding:  2px 0;
+
+      }
+      .chart-holder {
+        width: 25.5rem;
+        height: 25.5rem;
+        margin: 10px 0;
+        background-color: #5E81AC
+;
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+        border-radius: 20px;
+        padding: 10px ;
+        padding-top: 3rem;
+      }
+      .doughnut-holder {
+        width: 25.8rem;
+        height: 25.8rem;
+        margin: 10px 0;
+        background-color:#5E81AC;
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+        border-radius: 20px;
+        padding: 10px;
+      }
+      .data-holder{
+          width: 25.5rem;
+          height: 25.5rem;
+          margin:   10px 0;
+          background-color: #5E81AC;
+          box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+          border-radius: 20px;
+          padding: 10px;
+      }
+     
+   
+    </style>
+
+    <!--End Graphs-->
+    {% endblock %}
+  </div>
+</div>
