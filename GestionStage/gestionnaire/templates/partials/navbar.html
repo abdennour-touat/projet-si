@@ -1,43 +1,73 @@
-
- 
 <!-- <a style="margin-left: 5rem; margin-top: 2rem;" style="font-size: 48px;text-decoration: none; color: white;" href="{% url 'dashboard-index' %}"> <p style="text-align: center;margin-top: 35px;">ESI</p></a> -->
-<div class="d-flex justify-content-center " style="margin-top: 1.4rem;">
-  <a class="align-self-center mx-5"  href="{% url 'dashboard-index' %}"><i class="fa fa-home fa-3x" style="color:#ECEFF4 ;"></i></a>
+<div class="d-flex justify-content-center" style="margin-top: 1rem">
+  <a class="align-self-center mx-5" href="{% url 'dashboard-index' %}"
+    ><i class="fa fa-home fa-3x" style="color: #eceff4"></i
+  ></a>
   <!-- <div class="image align-self-center">
     <a class="mx-auto"  href="{% url 'dashboard-index' %}" ><img  src="https://lria.usthb.dz/sites/default/files/inline-images/USTHB_Logo%20WHITE.png" alt="usth fucking b" ></a>
   </div> -->
 
-
-
-
-<nav class="mx-auto align-self-center" style="margin-top: 0.4rem; color: #ECEFF4; width: 60vw;  ">
+  <nav
+    class="mx-auto align-self-center"
+    style="margin-top: 0.4rem; color: #eceff4; width: 60vw"
+  >
     <!-- <a class="navbar-brand text-white" href="#">ESI</a> -->
     <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button> -->
     <div class=" " id="navbarSupportedContent">
-      <ul class="navbar-nav mx-auto shadow text-white d-flex flex-row justify-content-around"style=" background-color: #5E81AC; border-radius: 35px 35px;">
+      <ul
+        class="navbar-nav mx-auto shadow text-white d-flex flex-row justify-content-around"
+        style="background-color: #5e81ac; border-radius: 35px 35px"
+      >
         <!-- <li class="nav-item active">
           <a class="nav-link text-white" href="{% url 'dashboard-index' %}"> Home <span class="sr-only">(current)</span></a>
         </li> -->
-        <li class=" active items stage" style="padding-left: 5%;border-radius: 35px 0 0 35px  ;">
-
-          <a class="nav-link text-white  "  href="{% url 'dashboard-Stage' %}">Stages</a>
+        <li
+          class="active items stage"
+          style="padding-left: 5%; border-radius: 35px 0 0 35px"
+        >
+          <a class="nav-link text-white" href="{% url 'dashboard-Stage' %}"
+            >Stages</a
+          >
         </li>
-        <li class=" active items group">
-          <a class="nav-link text-white text-lg" href="{% url 'dashboard-Group' %}">Groupes</a>
+        <li class="active items group">
+          <a
+            class="nav-link text-white text-lg"
+            href="{% url 'dashboard-Group' %}"
+            >Groupes</a
+          >
         </li>
-        <li class=" active items stagier">
-          <a class="nav-link text-white text-lg"  href="{% url 'dashboard-Stagier' %}">Stagiers</a>
+        <li class="active items stagier">
+          <a
+            class="nav-link text-white text-lg"
+            href="{% url 'dashboard-Stagier' %}"
+            >Stagiers</a
+          >
         </li>
         <li class="active items encadreur">
-          <a class="nav-link text-white text-lg"href="{% url 'dashboard-encadreur' %}">Encadreurs</a>
+          <a
+            class="nav-link text-white text-lg"
+            href="{% url 'dashboard-encadreur' %}"
+            >Encadreurs</a
+          >
         </li>
         <li class="active items promoteur">
-          <a class="nav-link text-white text-lg" href="{% url 'dashboard-promoteur' %}">Promoteurs</a>
+          <a
+            class="nav-link text-white text-lg"
+            href="{% url 'dashboard-promoteur' %}"
+            >Promoteurs</a
+          >
         </li>
-        <li class=" active items Organisme" style="padding-right: 5%;border-radius: 0 35px  35px 0  ;">
-          <a class="nav-link text-white text-lg" href="{% url 'dashboard-Organisme' %}">Organismes </a>
+        <li
+          class="active items Organisme"
+          style="padding-right: 5%; border-radius: 0 35px 35px 0"
+        >
+          <a
+            class="nav-link text-white text-lg"
+            href="{% url 'dashboard-Organisme' %}"
+            >Organismes
+          </a>
         </li>
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
@@ -57,31 +87,29 @@
       </ul>
     </div>
   </nav>
-    
 
-<a class="align-self-center mx-5" href="{% url 'user-logout' %}"><i class="fa fa-sign-out-alt fa-3x " style="color:#ECEFF4 ;"></i> </a>
-
+  <a class="align-self-center mx-5" href="{% url 'user-logout' %}"
+    ><i class="fa fa-sign-out-alt fa-3x" style="color: #eceff4"></i>
+  </a>
 </div>
-  <style>
-    .items{
-      text-align: center;
-      flex: 1;
-      padding: 2px 0;
-      font-size: 20px!important;
-      transition: 0.8s;
-    }
-    .items:hover{
-      background-color: #88C0D0;
-      
-    }
-    .image{
-      /* display: block;*/
-  margin-left: 12rem;
-  margin-right: 12rem; 
-  /* width: 105px; */
-    }
-    .image img{
-      width: 94px;
-    }
-    
-  </style>
+<style>
+  .items {
+    text-align: center;
+    flex: 1;
+    padding: 2px 0;
+    font-size: 20px !important;
+    transition: 0.8s;
+  }
+  .items:hover {
+    background-color: #88c0d0;
+  }
+  .image {
+    /* display: block;*/
+    margin-left: 12rem;
+    margin-right: 12rem;
+    /* width: 105px; */
+  }
+  .image img {
+    width: 94px;
+  }
+</style>
