@@ -33,8 +33,8 @@ class Promoteur(models.Model):
         return f'{self.nomPromoteur}-{self.prenomPromoteur}'
 
 class Stage(models.Model):
-    nomStage=models.CharField("Titre du Satge",max_length=120)
-    typeStage=models.ForeignKey(TypeStage, on_delete=models.CASCADE, verbose_name="type du stsge")
+    nomStage=models.CharField("Titre du Stage",max_length=120)
+    typeStage=models.ForeignKey(TypeStage, on_delete=models.CASCADE, verbose_name="type du stage")
     idPromoteur=models.ForeignKey(Promoteur, on_delete=models.CASCADE, verbose_name="Promoteur")
     
     
