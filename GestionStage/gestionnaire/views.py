@@ -9,6 +9,18 @@ from django.contrib.auth.decorators import login_required
 #index view /main page
 @login_required(login_url='user-login')
 def index(request):
+
+    retardGroupe=[]
+    retardStagiaire=[]
+    retardEncadreur=[]
+
+    for groupe in Groupe.objects.all():
+        if str(groupe.dateRemise) == '1999-12-12':
+            retardGroupe.append(groupe)
+            retardStagiaire.append( Stagier.objects.filter(idGroupe = groupe.id) )
+            retardEncadreur.append( Encadreur.objects.filter(nomEncadreur = groupe.idEncadreur) )
+
+
     # Etat de classement des organismes partenaires professionnels de l'ESI sur la base du nombre de stagiaires retenus.
     stages_count=[]
     organismes=[]
@@ -74,10 +86,15 @@ def index(request):
         'anne':anne,
         'pfe_count':pfe_count,
         'list_organismes' : list_organismes,
-        'evolution':evolution
+        'evolution': evolution,
+        'retardGroupe' : retardGroupe,
+        'retardStagiaire' : retardStagiaire,
+        'retardEncadreur' : retardEncadreur,
     }
     
     return render(request,"dashboard/index.html",context)
+
+
 
 
 
@@ -155,120 +172,6 @@ def anneefiltre(request,pk):
     }
     return render(request,"dashboard/index.html",context)
 
-
-
-#index view /main page
-# @login_required(login_url='user-login')
-# def index(request):
-#     #inclh ymchi
-#     # Etat de classement des organismes partenaires professionnels de l'ESI sur la base du nombre de stagiaires retenus.
-#     stages_count=[]
-#     stages = []
-#     organismes=[]
-#     orgranismeOrdered = []
-#     orgranismeOrdered1 = []
-
-#     for organ in Organisme.objects.filter(typeOrganisme="Partenaire"):
-#         organismes.append(organ)
-#         for p in Promoteur.objects.filter(idOrganisme=organ.id):
-#             orgranismeOrdered.append(list(Promoteur.objects.filter(idOrganisme=p.id).values('idOrganisme')))
-#             for m in Stage.objects.filter(idPromoteur=p.id):
-#                 for i in Groupe.objects.filter(numStage=m.id):
-#                     stage_count =Stagier.objects.filter(idGroupe=i.id).count() 
-#                     # stages_count.append(Stagier.objects.filter(idGroupe=i.id).count())
-#                     stage_organ = organ.nomOrganisme
-#                     stages_count.append({'count': stage_count, 'nomOrgan' : stage_organ})
-
-
-#     for org in orgranismeOrdered :
-#        if(len(org) != 0):
-#            orgranismeOrdered1.append(list(Organisme.objects.filter(id=org.pop()['idOrganisme'],typeOrganisme="Partenaire")))
-
-
-#     pfe =Organisme.objects.all() #tout les organismes
-#     organismes =Organisme.objects.filter(typeOrganisme="Partenaire") #les organismes partenaires
-#     #----------------------------------------------------------------------------
-#     #les années
-#     anne = []
-#     for p in Stagier.objects.distinct().values_list('anneeStage'):
-#         for s in p:
-#             anne.append(s)
-#     anne.sort()
-#     #Taux d'évolution du nombre d'organismes ayant reçus des stagiaires PFE.
-
-#     # evolution=[]
-    
-#     # for year in anne:
-#     #     for org in Organisme.objects.all():
-#     #         for prom in Promoteur.objects.filter(idOrganisme=org.id):
-#     #             for st in Stage.objects.filter(typeStage=3, idPromoteur = prom.id):
-#     #                 if st.dateDebutStage.year == year:
-#     #                     evolution.append(Stage.objects.filter(typeStage=3, idPromoteur = prom.id).count())
-
-#     evolution=[]
-#     for organ in Organisme.objects.all():
-#         for p in Promoteur.objects.filter(idOrganisme=organ.id):
-#             for m in Stage.objects.filter(idPromoteur=p.id,typeStage=3):
-#                 for i in Groupe.objects.filter(numStage=m.id):
-#                     evolution.append(Stagier.objects.filter(idGroupe=i.id).count())
-    
-    
-#     #Répartition des PFE / entreprise
-#     pfe_count=[] 
-#     for i in Organisme.objects.all():
-#         for p in Promoteur.objects.filter(idOrganisme=i.id):
-#             pfe_count.append(Stage.objects.filter(idPromoteur=p.id,typeStage=3).count()) #id de 3CS est :3 
-#     context = {
-#         'organismes':organismes,
-#         'stages_count':stages_count,
-#         'anne':anne,
-#         'pfe_count':pfe_count,
-#         'pfe':pfe,
-#         'evolution':evolution,
-#     }
-#     return render(request,"dashboard/index.html",context)
-
-
-# def anneefiltre(request,pk):
-#      # Etat de classement des organismes partenaires professionnels de l'ESI sur la base du nombre de stagiaires retenus.
-#     stages_count=[]
-#     for organ in Organisme.objects.filter(typeOrganisme="Partenaire"):
-#         for p in Promoteur.objects.filter(idOrganisme=organ.id):
-#             for m in Stage.objects.filter(idPromoteur=p.id):
-#                 for i in Groupe.objects.filter(numStage=m.id):
-#                     stages_count.append(Stagier.objects.filter(idGroupe=i.id,anneeStage=pk).count())
-#     pfe =Organisme.objects.all() #tout les organismes
-#     organismes =Organisme.objects.filter(typeOrganisme="Partenaire") #les organismes partenaires
-#     #----------------------------------------------------------------------------
-#     #les années
-#     anne = []
-#     for p in Stagier.objects.distinct().values_list('anneeStage'):
-#         for s in p:
-#             anne.append(s)
-#     anne.sort()
-#     #------------------------------------------------------------
-#     #Répartition des PFE / entreprise
-#     pfe_count=[] 
-#     # for l in Organisme.objects.all():
-#     #     for p in Promoteur.objects.filter(idOrganisme=l.id):
-#     #         for m in Stage.objects.filter(idPromoteur=p.id):
-#     #             for i in Groupe.objects.filter(numStage=m.id):
-#     #                 for s in Stagier.objects.filter(idGroupe=i.id,anneeStage=pk):
-#     #                         pfe_count.append(Stage.objects.filter(idPromoteur=p.id,typeStage=3).count()) #id de 3CS est :3 
-#     stages = []
-#     for st in Stagier.objects.filter(anneeStage= pk).values('idGroupe'):
-#         for gr in Groupe.objects.filter(id= st['idGroupe']).values('numStage'):
-#             stages.append( Stage.objects.filter(id = gr['numStage']).values())
-
-#     context = {
-#         'organismes':organismes,
-#         'stages_count':stages_count,
-#         'organ':organ,
-#         'anne':anne,
-#         'pfe_count':stages,
-#         'pfe':pfe,
-#     }
-#     return render(request,"dashboard/index.html",context)
 
 
 
