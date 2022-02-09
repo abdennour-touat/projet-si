@@ -10,15 +10,20 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='user-login')
 def index(request):
 
+    
+    stagaire_count = Stagier.objects.all().count()
+    groupe_count = Groupe.objects.all().count()
+    nonRemise_count = Groupe.objects.filter(dateRemise = None).count()
+    encadreurs_count = Encadreur.objects.all().count()
+    organisme_count = Organisme.objects.all().count()
+
+
     retardGroupe=[]
-    retardStagiaire=[]
     retardEncadreur=[]
 
-    for groupe in Groupe.objects.all():
-        if str(groupe.dateRemise) == '1999-12-12':
+    for groupe in Groupe.objects.filter(dateRemise = None):
             retardGroupe.append(groupe)
-            retardStagiaire.append( Stagier.objects.filter(idGroupe = groupe.id) )
-            retardEncadreur.append( Encadreur.objects.filter(nomEncadreur = groupe.idEncadreur) )
+            retardEncadreur.append(Encadreur.objects.filter(nomEncadreur = groupe.idEncadreur))
 
 
     # Etat de classement des organismes partenaires professionnels de l'ESI sur la base du nombre de stagiaires retenus.
@@ -88,8 +93,12 @@ def index(request):
         'list_organismes' : list_organismes,
         'evolution': evolution,
         'retardGroupe' : retardGroupe,
-        'retardStagiaire' : retardStagiaire,
         'retardEncadreur' : retardEncadreur,
+        'organisme_count' : organisme_count,
+        'stagaire_count' : stagaire_count,
+        'encadreurs_count' : encadreurs_count,
+        'groupe_count' : groupe_count,
+        'nonRemise_count' : nonRemise_count,
     }
     
     return render(request,"dashboard/index.html",context)
@@ -98,11 +107,35 @@ def index(request):
 
 
 
+def retard(request,pk):
+
+    groupe = Groupe.objects.filter(dateRemise = None, id = pk)
+    retardStagiaire = Stagier.objects.filter(idGroupe = pk)
+
+    
+    context = {
+        'retardStagiaire' : retardStagiaire,
+        'groupe' : groupe,
+    }
+    
+    return render(request,"dashboard/retard.html",context)
+
+
+
+
 
 def anneefiltre(request,pk):
      # Etat de classement des organismes partenaires professionnels de l'ESI sur la base du nombre de stagiaires retenus.
     
-    
+    retardGroupe=[]
+    retardEncadreur=[]
+
+    for groupe in Groupe.objects.filter(dateRemise = None):
+            retardGroupe.append(groupe)
+            retardEncadreur.append(Encadreur.objects.filter(nomEncadreur = groupe.idEncadreur))
+
+
+
     stages_count=[]
     organismes=[]
 
@@ -169,6 +202,8 @@ def anneefiltre(request,pk):
         'pfe_count':pfe_count,
         'list_organismes' : list_organismes,
         'evolution' : evolution,
+        'retardGroupe' : retardGroupe,
+        'retardEncadreur' : retardEncadreur,
     }
     return render(request,"dashboard/index.html",context)
 

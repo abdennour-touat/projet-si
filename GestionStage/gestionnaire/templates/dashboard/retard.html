@@ -1,0 +1,64 @@
+{% block content %}
+
+<div class="" style="background-color: rgb(41, 46, 57);">
+    <div class="p-3" >
+      <h3 class="text-center">Detail</h3>
+      <hr style="background: rgb(236, 239, 244)"/>
+
+<style>
+    p {text-align: center;}
+    </style>
+<p> Detail groupe </p>
+  <table class="table bg-white mb-0">
+    <thead class="bg-info text-white">
+      <tr>
+        <th scope="col">id Groupe</th>
+        <th scope="col">Stage</th>
+        <th scope="col">date Stage</th>
+        <th scope="col">encadreur</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for retard in groupe %}
+      <tr>
+        <td>{{ retard.id }}</td>
+        <td>{{ retard.numStage }}</td>
+        <td>{{ retard.dateDebutStage }}</td>
+        <td>{{ retard.idEncadreur }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <p>  </p>
+  <p> Detail stagiaires </p>
+  <table class="table bg-white mb-0">
+    <thead class="bg-info text-white">
+      <tr>
+        <th scope="col">nom stagiaire</th>
+        <th scope="col">prenom stagiaire</th>
+        <th scope="col">email</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for retard in retardStagiaire %}
+      <tr>
+        <td>{{ retard.nomStagier }}</td>
+        <td>{{ retard.prenomStagier }}</td>
+        <td><a href="mailto:{{ retard.emailStagier }}">{{ retard.emailStagier }}</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  
+
+        <a class="btn ModalDelete" href="{% url 'dashboard-index' %}"
+          >Cancel</a
+        >
+        </button>
+    </div>
+
+</div>
+
+{% endblock%}

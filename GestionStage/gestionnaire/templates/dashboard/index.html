@@ -1,5 +1,7 @@
 {% extends 'partials/base.html' %} {% block title %} Home Page {% endblock %}
+{% load crispy_forms_tags %}
 {%block content %}
+
 
 <!--Graphs-->
 <script
@@ -77,6 +79,7 @@
               </li>
               {% endfor %}
             </ul>
+        
           </div>
     </div>
 
@@ -175,11 +178,61 @@
         
       </script>
     </div>
-    <!-- ILYES this is the part where you should add the groups.... -->
-    <div class="data-holder" style="width: 40%;"></div>
+  
+    
+
+    <div class="data-holder" style="width: 40%;">
+        <style>
+            p {text-align: center;}
+            </style>
+        <p>Rappport non remie </p>
+        <div  class="shadow holder"
+        style=" 
+          height: 350px;
+          overflow: scroll;
+          background: rgb(41, 46, 57);
+          border-radius: 20px;
+          opacity: 86% !important;
+        ">
+          <table class="table bg-white mb-0">
+            <thead class="bg-info text-white">
+              <tr>
+                <th scope="col">id Groupe</th>
+                <th scope="col">Encadreur</th>
+                <th scope="col">Contacter</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for retard in retardGroupe %}
+              <tr>
+                <td>{{ retard.id }}</td>
+                <td>{{ retard.idEncadreur }}</td>
+                <td>
+                    <button
+                    type="button"
+                    class="btn btn-info ModalContact"
+                    data-popup-url="{% url 'dashboard-contacter' retard.id%}"
+                    data-toggle="modal"
+                    style="font-size: 20px"
+                    data-target="#contactModal"
+                    >
+                        Contacter
+                    </button> 
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
 
    
     </div>
+
+    
+
+
+
+
     <style>
       .charts-holder {
         color: #ECEFF4!important;
@@ -230,6 +283,41 @@
     </style>
 
     <!--End Graphs-->
-    {% endblock %}
+
+
+
+    
   </div>
 </div>
+
+<div
+    class="modal fade row"
+    id="contactModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+    >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content mx-2" style="border-radius: 25px">
+        <div class="modal-body my-modal" id="contactbody"></div>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <script>
+     
+      $(".ModalContact").on("click", function (e) {
+        e.preventDefault();
+        var $popup = $("#contactModal");
+        var popup_url = $(this).data("popup-url");
+        $(".modal-body", $popup).load(popup_url, function () {
+          $popup.modal("show");
+        });
+      });
+      
+
+  </script>
+{% endblock %}

@@ -33,5 +33,7 @@ urlpatterns = [
     path('Stage/edit/<int:pk>/', views.StageEdit, name='dashboard-Stage-edit'),
     path('Stage/delete/<int:pk>/', views.StageDelete, name='dashboard-Stage-delete'),
 
-    path('index/<str:pk>', views.anneefiltre, name='dashboard-filtre'),
+    path('index/<str:pk>/', views.anneefiltre, name='dashboard-filtre'),
+
+    path('index/contacter/<int:pk>/', views.retard, name='dashboard-contacter'),
 ]
