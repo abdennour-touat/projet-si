@@ -55,7 +55,7 @@
         });
       </script>
     </div>
-    <div class="data-holder text-center ">
+    <div class="data-holder text-center">
         <div class="dropdown" >
             <button
               class="btn btn-secondary dropdown-toggle"
@@ -80,6 +80,14 @@
               {% endfor %}
             </ul>
         
+          </div>
+          <div  style="text-align: left; margin-top: 28px; ">
+            {% for n in nb%}
+            <div class="p-2" style="border-bottom: 1px solid white;">
+              <h3 style="white-space: nowrap;">{{n.nbe}}: <span>{{n.nb}}</span></h3> 
+            </div>
+            
+            {%endfor%}
           </div>
     </div>
 
