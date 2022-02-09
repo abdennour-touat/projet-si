@@ -10,12 +10,6 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='user-login')
 def index(request):
 
-    
-    stagaire_count = Stagier.objects.all().count()
-    groupe_count = Groupe.objects.all().count()
-    nonRemise_count = Groupe.objects.filter(dateRemise = None).count()
-    encadreurs_count = Encadreur.objects.all().count()
-    organisme_count = Organisme.objects.all().count()
 
 
     retardGroupe=[]
@@ -88,7 +82,9 @@ def index(request):
     nbEtudiant = Stagier.objects.all().count()
     nbStage  = Stage.objects.all().count()
     nbPromoteur= Promoteur.objects.all().count()
-    nb= [{'nbe':"Nombre Etudiant",'nb':nbEtudiant}, {'nbe':"Nombre Organisme",'nb':nbOrganisme},{'nbe':"Nombre Promoteur", 'nb':nbPromoteur},{'nbe':"Nombre Stage", 'nb':nbStage}] 
+    nbNonRemise = Groupe.objects.filter(dateRemise = None).count()
+    
+    nb= [{'nbe':"Nombre Etudiant",'nb':nbEtudiant}, {'nbe':"Nombre Organisme",'nb':nbOrganisme},{'nbe':"Nombre Promoteur", 'nb':nbPromoteur},{'nbe':"Nombre Stage", 'nb':nbStage},{'nbe':"Rapport non remise", 'nb':nbNonRemise}] 
 
     context = {
         'organismes':organismes,
@@ -99,11 +95,6 @@ def index(request):
         'evolution': evolution,
         'retardGroupe' : retardGroupe,
         'retardEncadreur' : retardEncadreur,
-        'organisme_count' : organisme_count,
-        'stagaire_count' : stagaire_count,
-        'encadreurs_count' : encadreurs_count,
-        'groupe_count' : groupe_count,
-        'nonRemise_count' : nonRemise_count,
         'evolution':evolution,
         'nb' : nb
     }
