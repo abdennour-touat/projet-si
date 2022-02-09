@@ -67,6 +67,11 @@ def index(request):
                 pfe_count.append(Stage.objects.filter(idPromoteur=p.id,typeStage=3).count() )
                 list_organismes.append(i)
 
+    nbOrganisme = Organisme.objects.all().count()
+    nbEtudiant = Stagier.objects.all().count()
+    nbStage  = Stage.objects.all().count()
+    nbPromoteur= Promoteur.objects.all().count()
+    nb= {"Nombre Organisme":nbOrganisme,"Nombre Etudiant": nbEtudiant,"Nombre Stage": nbStage,"Nombre Promoteur": nbPromoteur}
 
     context = {
         'organismes':organismes,
@@ -74,7 +79,8 @@ def index(request):
         'anne':anne,
         'pfe_count':pfe_count,
         'list_organismes' : list_organismes,
-        'evolution':evolution
+        'evolution':evolution,
+        'nb' : nb
     }
     
     return render(request,"dashboard/index.html",context)
