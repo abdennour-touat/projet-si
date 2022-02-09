@@ -71,7 +71,7 @@ def index(request):
     nbEtudiant = Stagier.objects.all().count()
     nbStage  = Stage.objects.all().count()
     nbPromoteur= Promoteur.objects.all().count()
-    nb= {"Nombre Organisme":nbOrganisme,"Nombre Etudiant": nbEtudiant,"Nombre Stage": nbStage,"Nombre Promoteur": nbPromoteur}
+    nb= [{'nbe':"Nombre Etudiant",'nb':nbEtudiant}, {'nbe':"Nombre Organisme",'nb':nbOrganisme},{'nbe':"Nombre Promoteur", 'nb':nbPromoteur},{'nbe':"Nombre Stage", 'nb':nbStage}] 
 
     context = {
         'organismes':organismes,
